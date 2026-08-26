@@ -7,23 +7,53 @@ console.log("DB_HOST:", process.env.DB_HOST);
 console.log("DB_USER:", process.env.DB_USER);
 console.log("DB_NAME:", process.env.DB_NAME);
 
-const db = mysql.createConnection({
+const pool = mysql.createPool({
+
     host: process.env.DB_HOST || "localhost",
+
     user: process.env.DB_USER || "root",
+
     password: process.env.DB_PASSWORD || "",
+
     database: process.env.DB_NAME || "bmw_travel",
-    port: Number(process.env.DB_PORT) || 3306
+
+    port: process.env.DB_PORT || 3306,
+
+    waitForConnections: true,
+
+    connectionLimit: 10,
+
+    queueLimit: 0
+
 });
 
-db.connect((error) => {
+
+/* =========================
+   TEST DATABASE CONNECTION
+========================= */
+
+pool.getConnection((error, connection) => {
 
     if (error) {
-        console.log("❌ MySQL Connection Failed:");
-        console.log(error.message);
+
+        console.error(
+            "❌ MySQL Connection Failed:"
+        );
+
+        console.error(error.message);
+
         return;
     }
 
-    console.log("✅ MySQL Connected Successfully!");
+
+    console.log(
+        "✅ MySQL Connected Successfully"
+    );
+
+
+    connection.release();
+
 });
 
-module.exports = db;
+
+module.exports = pool;
