@@ -1,9 +1,19 @@
+/* ==================================================
+   BMW JOURNEY
+   Interactive Journey Dashboard
+================================================== */
+
+
+/* ==================================================
+   API
+================================================== */
+
 const API_URL = "/api/journeys";
 
 
-/* =========================
+/* ==================================================
    DOM ELEMENTS
-========================= */
+================================================== */
 
 const journeyForm =
     document.getElementById("journeyForm");
@@ -23,6 +33,9 @@ const locationBtn =
 const refreshBtn =
     document.getElementById("refreshBtn");
 
+const centerMapBtn =
+    document.getElementById("centerMapBtn");
+
 const tableBody =
     document.getElementById("journeyTableBody");
 
@@ -38,26 +51,359 @@ const totalDistance =
 const locationStatus =
     document.getElementById("locationStatus");
 
+const mapCount =
+    document.getElementById("mapCount");
 
-/* =========================
+
+/* ==================================================
+   MAP VARIABLES
+================================================== */
+
+let journeyMap = null;
+
+let mapMarkers = [];
+
+let journeys = [];
+
+
+/* ==================================================
+   INITIALIZE MAP
+================================================== */
+
+function initializeMap() {
+
+    const mapElement =
+        document.getElementById("journeyMap");
+
+
+    if (!mapElement) {
+
+        console.error(
+            "Journey map element not found."
+        );
+
+        return;
+
+    }
+
+
+    journeyMap =
+        L.map("journeyMap");
+
+
+    /* =========================
+       OPEN STREET MAP
+    ========================== */
+
+    L.tileLayer(
+        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+        {
+
+            maxZoom: 19,
+
+            attribution:
+                "&copy; OpenStreetMap contributors"
+
+        }
+    ).addTo(journeyMap);
+
+
+    /* =========================
+       DEFAULT LOCATION
+       Kathmandu
+    ========================== */
+
+    journeyMap.setView(
+        [27.7172, 85.3240],
+        7
+    );
+
+}
+
+
+/* ==================================================
+   CLEAR MAP
+================================================== */
+
+function clearMap() {
+
+    mapMarkers.forEach(
+        marker => {
+
+            journeyMap.removeLayer(
+                marker
+            );
+
+        }
+    );
+
+
+    mapMarkers = [];
+
+}
+
+
+/* ==================================================
+   DISPLAY MAP MARKERS
+================================================== */
+
+function displayJourneyMarkers(
+    journeyList
+) {
+
+    if (!journeyMap) {
+
+        return;
+
+    }
+
+
+    clearMap();
+
+
+    if (
+        !journeyList ||
+        journeyList.length === 0
+    ) {
+
+        mapCount.textContent =
+            "0 locations";
+
+        return;
+
+    }
+
+
+    const validJourneys =
+        journeyList.filter(
+            journey => {
+
+                const latitude =
+                    Number(
+                        journey.latitude
+                    );
+
+                const longitude =
+                    Number(
+                        journey.longitude
+                    );
+
+
+                return (
+                    Number.isFinite(
+                        latitude
+                    ) &&
+                    Number.isFinite(
+                        longitude
+                    )
+                );
+
+            }
+        );
+
+
+    validJourneys.forEach(
+        journey => {
+
+
+            const latitude =
+                Number(
+                    journey.latitude
+                );
+
+
+            const longitude =
+                Number(
+                    journey.longitude
+                );
+
+
+            /* =========================
+               CREATE MARKER
+            ========================== */
+
+            const marker =
+                L.marker([
+                    latitude,
+                    longitude
+                ]);
+
+
+            marker.addTo(
+                journeyMap
+            );
+
+
+            /* =========================
+               FORMAT DATE
+            ========================== */
+
+            let dateText =
+                "Unknown";
+
+
+            if (
+                journey.created_at
+            ) {
+
+                dateText =
+                    new Date(
+                        journey.created_at
+                    ).toLocaleString(
+                        "en-US",
+                        {
+                            year: "numeric",
+                            month: "short",
+                            day: "numeric",
+                            hour: "2-digit",
+                            minute: "2-digit"
+                        }
+                    );
+
+            }
+
+
+            /* =========================
+               POPUP
+            ========================== */
+
+            marker.bindPopup(`
+
+                <div class="map-popup">
+
+                    <h3>
+                        🚗 Journey #${journey.id}
+                    </h3>
+
+
+                    <p>
+                        <strong>
+                            Distance:
+                        </strong>
+
+                        ${Number(
+                            journey.distance
+                        ).toFixed(2)} KM
+                    </p>
+
+
+                    <p>
+                        <strong>
+                            Latitude:
+                        </strong>
+
+                        ${latitude.toFixed(6)}
+                    </p>
+
+
+                    <p>
+                        <strong>
+                            Longitude:
+                        </strong>
+
+                        ${longitude.toFixed(6)}
+                    </p>
+
+
+                    <p>
+                        <strong>
+                            Date:
+                        </strong>
+
+                        ${dateText}
+                    </p>
+
+                </div>
+
+            `);
+
+
+            mapMarkers.push(
+                marker
+            );
+
+        }
+    );
+
+
+    /* =========================
+       MAP COUNT
+    ========================== */
+
+    mapCount.textContent =
+        `${validJourneys.length} location${
+            validJourneys.length === 1
+                ? ""
+                : "s"
+        }`;
+
+
+    /* =========================
+       FIT MAP TO MARKERS
+    ========================== */
+
+    if (
+        mapMarkers.length > 0
+    ) {
+
+        const group =
+            L.featureGroup(
+                mapMarkers
+            );
+
+
+        journeyMap.fitBounds(
+            group.getBounds(),
+            {
+                padding: [40, 40],
+
+                maxZoom: 13
+            }
+        );
+
+    }
+
+}
+
+
+/* ==================================================
    LOAD JOURNEYS
-========================= */
+================================================== */
 
 async function loadJourneys() {
 
     try {
 
+
         tableBody.innerHTML = `
+
             <tr>
-                <td colspan="6" class="loading">
+
+                <td
+                    colspan="6"
+                    class="loading"
+                >
                     Loading journeys...
                 </td>
+
             </tr>
+
         `;
 
 
         const response =
-            await fetch(API_URL);
+            await fetch(
+                API_URL
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                `Server returned ${response.status}`
+            );
+
+        }
 
 
         const data =
@@ -67,27 +413,68 @@ async function loadJourneys() {
         if (!data.success) {
 
             throw new Error(
-                data.message || "Failed to load journeys."
+                data.message ||
+                "Unable to load journeys."
             );
 
         }
 
 
-        displayJourneys(data.journeys);
+        journeys =
+            data.journeys || [];
 
-        updateStatistics(data.journeys);
+
+        /* =========================
+           UPDATE TABLE
+        ========================== */
+
+        displayJourneys(
+            journeys
+        );
 
 
-    } catch (error) {
+        /* =========================
+           UPDATE STATISTICS
+        ========================== */
 
-        console.error(error);
+        updateStatistics(
+            journeys
+        );
+
+
+        /* =========================
+           UPDATE MAP
+        ========================== */
+
+        displayJourneyMarkers(
+            journeys
+        );
+
+
+    }
+
+    catch (error) {
+
+
+        console.error(
+            "Load journeys error:",
+            error
+        );
+
 
         tableBody.innerHTML = `
+
             <tr>
-                <td colspan="6" class="loading">
+
+                <td
+                    colspan="6"
+                    class="loading"
+                >
                     ❌ Failed to load journeys.
                 </td>
+
             </tr>
+
         `;
 
     }
@@ -95,124 +482,222 @@ async function loadJourneys() {
 }
 
 
-/* =========================
-   DISPLAY JOURNEYS
-========================= */
+/* ==================================================
+   DISPLAY JOURNEYS IN TABLE
+================================================== */
 
-function displayJourneys(journeys) {
+function displayJourneys(
+    journeyList
+) {
 
-    if (!journeys || journeys.length === 0) {
+
+    if (
+        !journeyList ||
+        journeyList.length === 0
+    ) {
+
 
         tableBody.innerHTML = `
+
             <tr>
-                <td colspan="6" class="loading">
+
+                <td
+                    colspan="6"
+                    class="loading"
+                >
                     No journeys recorded yet.
                 </td>
+
             </tr>
+
         `;
 
+
         return;
+
     }
 
 
     tableBody.innerHTML =
-        journeys.map((journey, index) => {
-
-            const date =
-                formatDate(journey.created_at);
+        journeyList.map(
+            (journey, index) => {
 
 
-            return `
-                <tr>
+                const distance =
+                    Number(
+                        journey.distance
+                    );
 
-                    <td>
-                        ${index + 1}
-                    </td>
 
-                    <td>
-                        <strong>
-                            ${Number(journey.distance).toFixed(2)}
-                        </strong>
-                        km
-                    </td>
+                const latitude =
+                    Number(
+                        journey.latitude
+                    );
 
-                    <td>
-                        ${Number(journey.latitude).toFixed(6)}
-                    </td>
 
-                    <td>
-                        ${Number(journey.longitude).toFixed(6)}
-                    </td>
+                const longitude =
+                    Number(
+                        journey.longitude
+                    );
 
-                    <td>
-                        ${date}
-                    </td>
 
-                    <td>
+                return `
 
-                        <button
-                            class="delete-btn"
-                            onclick="deleteJourney(${journey.id})"
-                        >
-                            Delete
-                        </button>
+                    <tr>
 
-                    </td>
+                        <td>
+                            ${index + 1}
+                        </td>
 
-                </tr>
-            `;
 
-        }).join("");
+                        <td>
+
+                            <strong>
+                                ${distance.toFixed(2)}
+                            </strong>
+
+                            KM
+
+                        </td>
+
+
+                        <td>
+                            ${latitude.toFixed(6)}
+                        </td>
+
+
+                        <td>
+                            ${longitude.toFixed(6)}
+                        </td>
+
+
+                        <td>
+                            ${formatDate(
+                                journey.created_at
+                            )}
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                class="delete-btn"
+                                onclick="deleteJourney(${journey.id})"
+                            >
+                                Delete
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                `;
+
+            }
+        ).join("");
 
 }
 
 
-/* =========================
+/* ==================================================
    UPDATE STATISTICS
-========================= */
+================================================== */
 
-function updateStatistics(journeys) {
+function updateStatistics(
+    journeyList
+) {
+
 
     totalJourneys.textContent =
-        journeys.length;
+        journeyList.length;
 
 
-    const distance =
-        journeys.reduce(
-            (total, journey) =>
-                total + Number(journey.distance),
+    const total =
+        journeyList.reduce(
+            (
+                sum,
+                journey
+            ) => {
+
+                return (
+                    sum +
+                    Number(
+                        journey.distance
+                    )
+                );
+
+            },
             0
         );
 
 
     totalDistance.textContent =
-        distance.toFixed(2);
+        total.toFixed(2);
+
+
+    if (
+        journeyList.length > 0
+    ) {
+
+        locationStatus.textContent =
+            `${journeyList.length} saved`;
+
+    }
+
+    else {
+
+        locationStatus.textContent =
+            "Standby";
+
+    }
 
 }
 
 
-/* =========================
+/* ==================================================
    FORMAT DATE
-========================= */
+================================================== */
 
-function formatDate(dateString) {
+function formatDate(
+    dateString
+) {
+
 
     if (!dateString) {
+
         return "N/A";
+
     }
 
 
     const date =
-        new Date(dateString);
+        new Date(
+            dateString
+        );
+
+
+    if (
+        isNaN(
+            date.getTime()
+        )
+    ) {
+
+        return "N/A";
+
+    }
 
 
     return date.toLocaleString(
         "en-US",
         {
             year: "numeric",
+
             month: "short",
+
             day: "numeric",
+
             hour: "2-digit",
+
             minute: "2-digit"
         }
     );
@@ -220,9 +705,9 @@ function formatDate(dateString) {
 }
 
 
-/* =========================
+/* ==================================================
    SAVE JOURNEY
-========================= */
+================================================== */
 
 journeyForm.addEventListener(
     "submit",
@@ -241,10 +726,14 @@ journeyForm.addEventListener(
             longitudeInput.value.trim();
 
 
+        /* =========================
+           VALIDATION
+        ========================== */
+
         if (
-            !distance ||
-            !latitude ||
-            !longitude
+            distance === "" ||
+            latitude === "" ||
+            longitude === ""
         ) {
 
             showMessage(
@@ -253,15 +742,32 @@ journeyForm.addEventListener(
             );
 
             return;
+
+        }
+
+
+        if (
+            Number(distance) < 0
+        ) {
+
+            showMessage(
+                "Distance cannot be negative.",
+                "error"
+            );
+
+            return;
+
         }
 
 
         try {
 
+
             const response =
                 await fetch(
                     API_URL,
                     {
+
                         method: "POST",
 
                         headers: {
@@ -269,18 +775,25 @@ journeyForm.addEventListener(
                                 "application/json"
                         },
 
-                        body: JSON.stringify({
+                        body:
+                            JSON.stringify({
 
-                            distance:
-                                Number(distance),
+                                distance:
+                                    Number(
+                                        distance
+                                    ),
 
-                            latitude:
-                                Number(latitude),
+                                latitude:
+                                    Number(
+                                        latitude
+                                    ),
 
-                            longitude:
-                                Number(longitude)
+                                longitude:
+                                    Number(
+                                        longitude
+                                    )
 
-                        })
+                            })
 
                     }
                 );
@@ -290,7 +803,10 @@ journeyForm.addEventListener(
                 await response.json();
 
 
-            if (!response.ok || !data.success) {
+            if (
+                !response.ok ||
+                !data.success
+            ) {
 
                 throw new Error(
                     data.message ||
@@ -309,16 +825,19 @@ journeyForm.addEventListener(
             journeyForm.reset();
 
 
-            locationStatus.textContent =
-                "Waiting";
-
-
             await loadJourneys();
 
+        }
 
-        } catch (error) {
 
-            console.error(error);
+        catch (error) {
+
+
+            console.error(
+                "Save journey error:",
+                error
+            );
+
 
             showMessage(
                 error.message ||
@@ -332,11 +851,14 @@ journeyForm.addEventListener(
 );
 
 
-/* =========================
+/* ==================================================
    DELETE JOURNEY
-========================= */
+================================================== */
 
-async function deleteJourney(id) {
+async function deleteJourney(
+    id
+) {
+
 
     const confirmed =
         confirm(
@@ -345,11 +867,14 @@ async function deleteJourney(id) {
 
 
     if (!confirmed) {
+
         return;
+
     }
 
 
     try {
+
 
         const response =
             await fetch(
@@ -364,7 +889,10 @@ async function deleteJourney(id) {
             await response.json();
 
 
-        if (!response.ok || !data.success) {
+        if (
+            !response.ok ||
+            !data.success
+        ) {
 
             throw new Error(
                 data.message ||
@@ -375,17 +903,24 @@ async function deleteJourney(id) {
 
 
         showMessage(
-            "Journey deleted successfully.",
+            "✓ Journey deleted successfully.",
             "success"
         );
 
 
         await loadJourneys();
 
+    }
 
-    } catch (error) {
 
-        console.error(error);
+    catch (error) {
+
+
+        console.error(
+            "Delete journey error:",
+            error
+        );
+
 
         showMessage(
             error.message ||
@@ -398,65 +933,172 @@ async function deleteJourney(id) {
 }
 
 
-/* =========================
-   GET GPS LOCATION
-========================= */
+/* ==================================================
+   GET CURRENT GPS LOCATION
+================================================== */
 
 locationBtn.addEventListener(
     "click",
     function () {
 
-        if (!navigator.geolocation) {
+
+        if (
+            !navigator.geolocation
+        ) {
+
 
             showMessage(
                 "Geolocation is not supported by your browser.",
                 "error"
             );
 
+
             return;
+
         }
+
+
+        locationBtn.disabled =
+            true;
+
+
+        locationBtn.textContent =
+            "📍 Locating...";
 
 
         locationStatus.textContent =
             "Locating...";
 
 
-        locationBtn.disabled = true;
-
-        locationBtn.textContent =
-            "📍 Locating...";
-
-
         navigator.geolocation.getCurrentPosition(
 
             function (position) {
 
+
                 const latitude =
                     position.coords.latitude;
+
 
                 const longitude =
                     position.coords.longitude;
 
 
+                /* =========================
+                   PUT GPS INTO FORM
+                ========================== */
+
                 latitudeInput.value =
                     latitude.toFixed(8);
+
 
                 longitudeInput.value =
                     longitude.toFixed(8);
 
 
+                /* =========================
+                   UPDATE STATUS
+                ========================== */
+
                 locationStatus.textContent =
                     "Located";
 
 
-                locationBtn.disabled = false;
+                /* =========================
+                   MOVE MAP
+                ========================== */
+
+                if (
+                    journeyMap
+                ) {
+
+
+                    journeyMap.setView(
+                        [
+                            latitude,
+                            longitude
+                        ],
+                        15
+                    );
+
+
+                    /*
+                     * Temporary current
+                     * location marker
+                     */
+
+                    const currentMarker =
+                        L.marker([
+                            latitude,
+                            longitude
+                        ]).addTo(
+                            journeyMap
+                        );
+
+
+                    currentMarker.bindPopup(`
+
+                        <div class="map-popup">
+
+                            <h3>
+                                📍 Your Location
+                            </h3>
+
+                            <p>
+                                <strong>
+                                    Latitude:
+                                </strong>
+
+                                ${latitude.toFixed(6)}
+                            </p>
+
+                            <p>
+                                <strong>
+                                    Longitude:
+                                </strong>
+
+                                ${longitude.toFixed(6)}
+                            </p>
+
+                        </div>
+
+                    `);
+
+
+                    currentMarker.openPopup();
+
+
+                    setTimeout(
+                        function () {
+
+                            if (
+                                journeyMap.hasLayer(
+                                    currentMarker
+                                )
+                            ) {
+
+                                journeyMap.removeLayer(
+                                    currentMarker
+                                );
+
+                            }
+
+                        },
+                        10000
+                    );
+
+                }
+
+
+                locationBtn.disabled =
+                    false;
+
 
                 locationBtn.textContent =
                     "📍 Get My Location";
 
 
                 showMessage(
-                    "✓ Your current location has been added.",
+                    "✓ Your current location has been detected.",
                     "success"
                 );
 
@@ -465,32 +1107,81 @@ locationBtn.addEventListener(
 
             function (error) {
 
-                console.error(error);
+
+                console.error(
+                    "GPS error:",
+                    error
+                );
+
+
+                locationBtn.disabled =
+                    false;
+
+
+                locationBtn.textContent =
+                    "📍 Get My Location";
 
 
                 locationStatus.textContent =
                     "Unavailable";
 
 
-                locationBtn.disabled = false;
+                let errorMessage =
+                    "Unable to get your location.";
 
-                locationBtn.textContent =
-                    "📍 Get My Location";
+
+                if (
+                    error.code ===
+                    error.PERMISSION_DENIED
+                ) {
+
+                    errorMessage =
+                        "Location permission was denied.";
+
+                }
+
+
+                else if (
+                    error.code ===
+                    error.POSITION_UNAVAILABLE
+                ) {
+
+                    errorMessage =
+                        "Your location is currently unavailable.";
+
+                }
+
+
+                else if (
+                    error.code ===
+                    error.TIMEOUT
+                ) {
+
+                    errorMessage =
+                        "Location request timed out.";
+
+                }
 
 
                 showMessage(
-                    "Unable to get your location. Please allow location access.",
+                    errorMessage,
                     "error"
                 );
 
             },
 
+
             {
-                enableHighAccuracy: true,
 
-                timeout: 10000,
+                enableHighAccuracy:
+                    true,
 
-                maximumAge: 0
+                timeout:
+                    10000,
+
+                maximumAge:
+                    0
+
             }
 
         );
@@ -499,26 +1190,100 @@ locationBtn.addEventListener(
 );
 
 
-/* =========================
-   REFRESH
-========================= */
+/* ==================================================
+   SHOW ALL JOURNEYS
+================================================== */
 
-refreshBtn.addEventListener(
+centerMapBtn.addEventListener(
     "click",
-    loadJourneys
+    function () {
+
+
+        if (
+            !journeyMap ||
+            mapMarkers.length === 0
+        ) {
+
+
+            showMessage(
+                "There are no journey locations to display.",
+                "error"
+            );
+
+
+            return;
+
+        }
+
+
+        const group =
+            L.featureGroup(
+                mapMarkers
+            );
+
+
+        journeyMap.fitBounds(
+            group.getBounds(),
+            {
+
+                padding: [
+                    40,
+                    40
+                ],
+
+                maxZoom: 13
+
+            }
+        );
+
+    }
 );
 
 
-/* =========================
+/* ==================================================
+   REFRESH BUTTON
+================================================== */
+
+refreshBtn.addEventListener(
+    "click",
+    async function () {
+
+
+        refreshBtn.disabled =
+            true;
+
+
+        refreshBtn.textContent =
+            "↻ Loading...";
+
+
+        await loadJourneys();
+
+
+        refreshBtn.disabled =
+            false;
+
+
+        refreshBtn.textContent =
+            "↻ Refresh";
+
+    }
+);
+
+
+/* ==================================================
    SHOW MESSAGE
-========================= */
+================================================== */
 
 function showMessage(
     text,
     type
 ) {
 
-    message.textContent = text;
+
+    message.textContent =
+        text;
+
 
     message.className =
         type === "success"
@@ -529,9 +1294,11 @@ function showMessage(
     setTimeout(
         function () {
 
-            message.textContent = "";
+            message.textContent =
+                "";
 
-            message.className = "";
+            message.className =
+                "";
 
         },
         4000
@@ -540,8 +1307,27 @@ function showMessage(
 }
 
 
-/* =========================
-   INITIAL LOAD
-========================= */
+/* ==================================================
+   START APPLICATION
+================================================== */
 
-loadJourneys();
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+
+        /* =========================
+           START MAP
+        ========================== */
+
+        initializeMap();
+
+
+        /* =========================
+           LOAD DATABASE JOURNEYS
+        ========================== */
+
+        loadJourneys();
+
+    }
+);
