@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BMW Journey | My Journeys</title>
+
+    <link rel="stylesheet" href="css/journey.css">
+</head>
+
+<body>
+
+    <!-- =========================
+         NAVBAR
+    ========================== -->
+
+    <header class="navbar">
+
+        <div class="logo">
+            <span class="logo-icon">✦</span>
+            <span>BMW <b>JOURNEY</b></span>
+        </div>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="journey.html" class="active">Journey</a>
+            <a href="about.html">About</a>
+        </nav>
+
+    </header>
+
+
+    <!-- =========================
+         HERO
+    ========================== -->
+
+    <section class="journey-hero">
+
+        <div class="hero-content">
+
+            <span class="eyebrow">YOUR DRIVING EXPERIENCE</span>
+
+            <h1>
+                Every Journey
+                <span>Matters.</span>
+            </h1>
+
+            <p>
+                Track your BMW journeys, capture your location,
+                and keep every memorable drive in one place.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         DASHBOARD
+    ========================== -->
+
+    <main class="dashboard">
+
+        <!-- Statistics -->
+
+        <section class="stats">
+
+            <div class="stat-card">
+
+                <span class="stat-icon">↗</span>
+
+                <div>
+                    <p>Total Journeys</p>
+                    <h2 id="totalJourneys">0</h2>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <span class="stat-icon">KM</span>
+
+                <div>
+                    <p>Total Distance</p>
+                    <h2>
+                        <span id="totalDistance">0.00</span>
+                        <small>km</small>
+                    </h2>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <span class="stat-icon">GPS</span>
+
+                <div>
+                    <p>Current Location</p>
+                    <h2 id="locationStatus">Waiting</h2>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             SAVE JOURNEY
+        ========================== -->
+
+        <section class="journey-panel">
+
+            <div class="panel-heading">
+
+                <div>
+                    <span class="section-label">NEW JOURNEY</span>
+
+                    <h2>Record Your Drive</h2>
+
+                    <p>
+                        Enter your journey information below.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <form id="journeyForm">
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label for="distance">
+                            Distance (KM)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="distance"
+                            name="distance"
+                            step="0.01"
+                            min="0"
+                            placeholder="e.g. 125.50"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="latitude">
+                            Latitude
+                        </label>
+
+                        <input
+                            type="number"
+                            id="latitude"
+                            name="latitude"
+                            step="any"
+                            placeholder="e.g. 27.7172"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="longitude">
+                            Longitude
+                        </label>
+
+                        <input
+                            type="number"
+                            id="longitude"
+                            name="longitude"
+                            step="any"
+                            placeholder="e.g. 85.3240"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-actions">
+
+                    <button
+                        type="button"
+                        id="locationBtn"
+                        class="secondary-btn"
+                    >
+                        📍 Get My Location
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="primary-btn"
+                    >
+                        Save Journey
+                    </button>
+
+                </div>
+
+            </form>
+
+
+            <div id="message"></div>
+
+        </section>
+
+
+        <!-- =========================
+             JOURNEY HISTORY
+        ========================== -->
+
+        <section class="history-section">
+
+            <div class="history-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        YOUR RECORDS
+                    </span>
+
+                    <h2>Journey History</h2>
+
+                </div>
+
+                <button
+                    id="refreshBtn"
+                    class="refresh-btn"
+                >
+                    ↻ Refresh
+                </button>
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>#</th>
+                            <th>Distance</th>
+                            <th>Latitude</th>
+                            <th>Longitude</th>
+                            <th>Date</th>
+                            <th>Action</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="journeyTableBody">
+
+                        <tr>
+
+                            <td
+                                colspan="6"
+                                class="loading"
+                            >
+                                Loading journeys...
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+
+        <div class="footer-logo">
+            BMW JOURNEY
+        </div>
+
+        <p>
+            Drive. Explore. Remember.
+        </p>
+
+        <span>
+            © 2026 BMW Journey Project
+        </span>
+
+    </footer>
+
+
+    <script src="js/journey.js"></script>
+
+</body>
+</html>
