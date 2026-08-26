@@ -3,87 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BMW Journey</title>
+    <title>BMW Journey | Home</title>
     <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<header class="navbar">
-    <div class="logo">BMW <span>JOURNEY</span></div>
-    <nav>
-        <a href="#home">Home</a>
-        <a href="journey.html">Journey</a>
-        <a href="about.html">About</a>
-    </nav>
-</header>
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <div class="logo">
+            <span class="logo-icon">✦</span>
+            <span>BMW <b>JOURNEY</b></span>
+        </div>
+        <nav>
+            <a href="index.html" class="active">Home</a>
+            <a href="journey.html">Journey</a>
+            <a href="about.html">About</a>
+        </nav>
+    </header>
 
-<!-- HERO SECTION WITH GRAPHICS -->
-<section class="hero" id="home">
-    <div class="hero-bg-grid"></div>
-    <div class="glow-orb"></div>
-
-    <div class="hero-content">
-        <!-- CSS-crafted Emblem -->
-        <div class="bmw-badge">
-            <div class="badge-ring">
-                <div class="badge-quadrant top-left"></div>
-                <div class="badge-quadrant top-right"></div>
-                <div class="badge-quadrant bottom-left"></div>
-                <div class="badge-quadrant bottom-right"></div>
+    <!-- HERO SECTION WITH GRAPHICS -->
+    <section class="journey-hero" id="home">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <!-- CSS-crafted Emblem -->
+            <div class="bmw-badge">
+                <div class="badge-ring">
+                    <div class="badge-quadrant top-left"></div>
+                    <div class="badge-quadrant top-right"></div>
+                    <div class="badge-quadrant bottom-left"></div>
+                    <div class="badge-quadrant bottom-right"></div>
+                </div>
             </div>
+
+            <span class="eyebrow">THE ULTIMATE DRIVING EXPERIENCE</span>
+            <h1>THE ROAD <br><span>IS YOURS</span></h1>
+            <p>Start your journey and experience every kilometer with precision, power, and live telemetry tracking.</p>
+            <button id="startJourney" class="primary-btn" style="margin-top: 15px;">START JOURNEY</button>
         </div>
+    </section>
 
-        <p class="subtitle">THE ULTIMATE DRIVING EXPERIENCE</p>
-        <h1>THE ROAD<br><span>IS YOURS</span></h1>
-        <p class="description">Start your journey and experience every kilometer with precision and power.</p>
-        <button id="startJourney" class="btn-primary">START JOURNEY</button>
-    </div>
-</section>
+    <!-- MAIN DASHBOARD LAYOUT -->
+    <main class="dashboard">
 
-<!-- JOURNEY TRACKER -->
-<section class="journey section-container" id="journey">
-    <div class="card journey-card">
-        <p class="section-title">YOUR JOURNEY</p>
-        <h2>TRACK YOUR DRIVE</h2>
-        <p id="status" class="status-text">Press "Start Journey" to begin.</p>
-
-        <div class="distance-display">
-            <span class="label">DISTANCE TRAVELLED</span>
-            <h3 id="distance">0.00 <small>KM</small></h3>
-        </div>
-
-        <div class="progress-wrapper">
-            <div class="progress-bar">
-                <div id="progress"></div>
+        <!-- LIVE TRACKER PANEL -->
+        <section class="journey-panel" id="journey">
+            <div class="panel-heading">
+                <span class="section-label">YOUR JOURNEY</span>
+                <h2>Track Your Drive</h2>
+                <p id="status" class="status-text">Press "Start Journey" to begin tracking live metrics.</p>
             </div>
-            <p class="target">Target Distance: <strong>5.00 KM</strong></p>
-        </div>
-    </div>
-</section>
 
-<!-- COMPLETED SECTION -->
-<section class="completed section-container" id="completed">
-    <div class="card completed-card">
-        <p class="section-title">DESTINATION REACHED</p>
-        <h2>YOU MADE IT.</h2>
-        <p id="completedMessage">Continue your journey and enjoy the road ahead.</p>
-    </div>
-</section>
+            <div class="stat-card" style="margin: 20px 0;">
+                <div class="stat-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                </div>
+                <div class="stat-data">
+                    <p>Distance Travelled</p>
+                    <h2><span id="distance">0.00</span> <small>KM</small></h2>
+                </div>
+            </div>
 
-<!-- ABOUT SECTION -->
-<section class="about section-container" id="about">
-    <div class="about-content">
-        <p class="section-title">BMW EXPERIENCE</p>
-        <h2>EVERY JOURNEY<br>TELLS A STORY</h2>
-        <p class="description">A precision-engineered journey tracking system designed around the raw excitement of modern driving performance.</p>
-    </div>
-</section>
+            <div class="progress-wrapper">
+                <div class="progress-bar" style="height: 10px; background: rgba(255,255,255,0.1); border-radius: 5px; overflow: hidden; margin-bottom: 8px;">
+                    <div id="progress" style="height: 100%; width: 0%; background: var(--primary); transition: width 0.3s ease;"></div>
+                </div>
+                <p class="target" style="font-size: 0.85rem; color: var(--text-muted);">Target Distance: <strong>5.00 KM</strong></p>
+            </div>
+        </section>
 
-<footer>
-    <p>&copy; 2026 BMW Journey. All Rights Reserved.</p>
-</footer>
+        <!-- COMPLETED SECTION -->
+        <section class="journey-panel" id="completed" style="margin-top: 30px;">
+            <div class="panel-heading">
+                <span class="section-label">DESTINATION REACHED</span>
+                <h2>YOU MADE IT.</h2>
+                <p id="completedMessage">Continue your journey and enjoy the road ahead.</p>
+            </div>
+        </section>
 
-<script src="js/script.js"></script>
+        <!-- ABOUT BRIEF SECTION -->
+        <section class="journey-panel" id="about-brief" style="margin-top: 30px;">
+            <div class="panel-heading">
+                <span class="section-label">BMW EXPERIENCE</span>
+                <h2>Every Journey <span>Tells A Story</span></h2>
+                <p>A precision-engineered journey tracking system designed around the raw excitement of modern driving performance.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-logo">BMW JOURNEY</div>
+        <p>Drive. Explore. Remember.</p>
+        <span>&copy; 2026 BMW Journey. All Rights Reserved.</span>
+    </footer>
+
+    <script src="js/script.js"></script>
 </body>
 </html>
