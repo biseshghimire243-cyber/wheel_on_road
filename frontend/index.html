@@ -1,173 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BMW Journey</title>
-
     <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
-<header>
-
-    <div class="logo">
-        BMW
-    </div>
-
+<header class="navbar">
+    <div class="logo">BMW <span>JOURNEY</span></div>
     <nav>
         <a href="#home">Home</a>
         <a href="#journey">Journey</a>
         <a href="#about">About</a>
     </nav>
-
 </header>
 
-
-<!-- ================= HERO ================= -->
-
+<!-- HERO SECTION -->
 <section class="hero" id="home">
-
+    <div class="hero-overlay"></div>
     <div class="hero-content">
-
-        <p class="subtitle">
-            THE ULTIMATE DRIVING EXPERIENCE
-        </p>
-
-        <h1>
-            THE ROAD<br>
-            IS YOURS
-        </h1>
-
-        <p class="description">
-            Start your journey and experience
-            every kilometer with BMW.
-        </p>
-
-        <button id="startJourney">
-            START JOURNEY
-        </button>
-
+        <p class="subtitle">THE ULTIMATE DRIVING EXPERIENCE</p>
+        <h1>THE ROAD<br><span>IS YOURS</span></h1>
+        <p class="description">Start your journey and experience every kilometer with precision and power.</p>
+        <button id="startJourney" class="btn-primary">START JOURNEY</button>
     </div>
-
 </section>
 
+<!-- JOURNEY TRACKER -->
+<section class="journey section-container" id="journey">
+    <div class="card journey-card">
+        <p class="section-title">YOUR JOURNEY</p>
+        <h2>TRACK YOUR DRIVE</h2>
+        <p id="status" class="status-text">Press "Start Journey" to begin.</p>
 
-<!-- ================= JOURNEY ================= -->
-
-<section class="journey" id="journey">
-
-    <div class="journey-content">
-
-        <p class="section-title">
-            YOUR JOURNEY
-        </p>
-
-        <h2>
-            TRACK YOUR DRIVE
-        </h2>
-
-        <p id="status">
-            Press "Start Journey" to begin.
-        </p>
-
-
-        <div class="distance-card">
-
-            <p>
-                DISTANCE TRAVELLED
-            </p>
-
-            <h3 id="distance">
-                0.00 KM
-            </h3>
-
+        <div class="distance-display">
+            <span class="label">DISTANCE TRAVELLED</span>
+            <h3 id="distance">0.00 <small>KM</small></h3>
         </div>
 
-
-        <div class="progress-container">
-
+        <div class="progress-wrapper">
             <div class="progress-bar">
-
                 <div id="progress"></div>
-
             </div>
-
+            <p class="target">Target Distance: <strong>5.00 KM</strong></p>
         </div>
-
-
-        <p class="target">
-
-            Target Distance:
-            <strong>5 KM</strong>
-
-        </p>
-
     </div>
-
 </section>
 
-
-<!-- ================= COMPLETED ================= -->
-
-<section class="completed" id="completed">
-
-    <div>
-
-        <p class="section-title">
-            JOURNEY COMPLETED
-        </p>
-
-        <h2>
-            YOU MADE IT.
-        </h2>
-
-        <p id="completedMessage">
-            Continue your journey and enjoy the road.
-        </p>
-
+<!-- COMPLETED SECTION -->
+<section class="completed section-container" id="completed">
+    <div class="card completed-card">
+        <p class="section-title">DESTINATION REACHED</p>
+        <h2>YOU MADE IT.</h2>
+        <p id="completedMessage">Continue your journey and enjoy the road ahead.</p>
     </div>
-
 </section>
 
-
-<!-- ================= ABOUT ================= -->
-
-<section class="about" id="about">
-
-    <p class="section-title">
-        BMW EXPERIENCE
-    </p>
-
-    <h2>
-        EVERY JOURNEY<br>
-        TELLS A STORY
-    </h2>
-
-    <p>
-        Experience a modern journey tracking system
-        designed around the excitement of driving.
-    </p>
-
+<!-- ABOUT SECTION -->
+<section class="about section-container" id="about">
+    <div class="about-content">
+        <p class="section-title">BMW EXPERIENCE</p>
+        <h2>EVERY JOURNEY<br>TELLS A STORY</h2>
+        <p class="description">A precision-engineered journey tracking system designed around the raw excitement of modern driving performance.</p>
+    </div>
 </section>
-
 
 <footer>
-
-    <p>
-        BMW Journey © 2026
-    </p>
-
+    <p>&copy; 2026 BMW Journey. All Rights Reserved.</p>
 </footer>
 
-
 <script src="js/script.js"></script>
-
 </body>
-
 </html>
