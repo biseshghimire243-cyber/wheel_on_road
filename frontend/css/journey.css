@@ -1,3 +1,6 @@
+/* ==========================================
+   1. GLOBAL VARIABLES & BASE STYLES
+   ========================================== */
 :root {
     --primary: #1c69d4;
     --primary-hover: #0046ad;
@@ -8,22 +11,88 @@
     --text-muted: #8b949e;
 }
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     background-color: var(--bg-dark);
     color: var(--text-main);
     font-family: 'Inter', sans-serif;
-    margin: 0;
+    line-height: 1.6;
 }
 
-/* Background Image Hero Section */
-.journey-hero {
-    position: relative;
-    height: 45vh;
-    min-height: 350px;
+/* ==========================================
+   2. FIXED NAVBAR
+   ========================================== */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
     padding: 0 8%;
-    /* High-resolution dark vehicle background */
+    background: rgba(10, 12, 16, 0.95);
+    backdrop-filter: blur(12px);
+    z-index: 1000;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.logo-icon {
+    color: var(--primary);
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+nav a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+}
+
+nav a.active, 
+nav a:hover {
+    color: var(--text-main);
+}
+
+nav a.active {
+    border-bottom: 2px solid var(--primary);
+    padding-bottom: 4px;
+}
+
+/* ==========================================
+   3. HERO SECTION (JOURNEY & ABOUT)
+   ========================================== */
+.journey-hero,
+.about-hero {
+    position: relative;
+    min-height: 400px;
+    padding-top: 120px; /* Offsets fixed navbar */
+    padding-bottom: 60px;
+    padding-left: 8%;
+    padding-right: 8%;
+    display: flex;
+    align-items: center;
     background: url('https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
 }
 
@@ -39,7 +108,8 @@ body {
     max-width: 600px;
 }
 
-.eyebrow, .section-label {
+.eyebrow, 
+.section-label {
     color: var(--primary);
     font-size: 0.75rem;
     font-weight: 800;
@@ -56,7 +126,9 @@ body {
     color: var(--primary);
 }
 
-/* Glassmorphism Dashboard Sections */
+/* ==========================================
+   4. DASHBOARD & GLASSMORPHISM CONTAINERS
+   ========================================== */
 .dashboard {
     max-width: 1200px;
     margin: -50px auto 60px;
@@ -72,7 +144,9 @@ body {
     margin-bottom: 30px;
 }
 
-.stat-card, .journey-panel, .history-section {
+.stat-card, 
+.journey-panel, 
+.history-section {
     background: var(--card-bg);
     backdrop-filter: blur(12px);
     border: 1px solid var(--border-color);
@@ -98,7 +172,9 @@ body {
     color: var(--primary);
 }
 
-/* Inputs & Form Styling */
+/* ==========================================
+   5. FORMS & INPUTS
+   ========================================== */
 .form-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -147,7 +223,9 @@ body {
     cursor: pointer;
 }
 
-/* Table Design */
+/* ==========================================
+   6. TABLES
+   ========================================== */
 .table-wrapper {
     overflow-x: auto;
     margin-top: 20px;
@@ -168,4 +246,22 @@ th, td {
 th {
     color: var(--text-muted);
     font-weight: 600;
+}
+
+/* ==========================================
+   7. FOOTER
+   ========================================== */
+footer {
+    text-align: center;
+    padding: 40px 20px;
+    border-top: 1px solid var(--border-color);
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+.footer-logo {
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: var(--text-main);
+    margin-bottom: 5px;
 }
