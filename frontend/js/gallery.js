@@ -1,1250 +1,434 @@
-/* =========================================================
-   BMW GALLERY JAVASCRIPT
-========================================================= */
+/* ==========================================
+   BMW JOURNEY - GALLERY
+   ========================================== */
 
 
-/* =========================================================
-   BMW DATA
-========================================================= */
+/* ==========================================
+   BMW MODEL DATABASE
+   ========================================== */
 
 const bmwModels = [
 
     {
-        id: 1,
-        name: "BMW M3 Competition",
-        category: "M Series",
-        type: "performance",
-        priority: "performance",
-        engine: "3.0L Twin Turbo",
-        power: "503 HP",
-        speed: "3.9 SEC",
-        topSpeed: "250 KM/H",
-        image: "https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=1000&q=85",
-        description: "A legendary high-performance sports sedan built for pure driving pleasure."
+        name: "BMW M3",
+        series: "M SERIES",
+        year: "2025",
+        type: "Performance Sedan",
+        image: "https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=900&q=85",
+        description: "A legendary high-performance sedan combining everyday usability with serious M performance."
     },
 
     {
-        id: 2,
-        name: "BMW M4 Competition",
-        category: "M Series",
-        type: "performance",
-        priority: "performance",
-        engine: "3.0L Twin Turbo",
-        power: "503 HP",
-        speed: "3.9 SEC",
-        topSpeed: "250 KM/H",
-        image: "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=1000&q=85",
-        description: "A powerful coupe combining aggressive design with exceptional M performance."
+        name: "BMW M4",
+        series: "M SERIES",
+        year: "2025",
+        type: "Performance Coupe",
+        image: "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=900&q=85",
+        description: "A striking performance coupe engineered for precision, speed and aggressive driving."
     },
 
     {
-        id: 3,
         name: "BMW M5",
-        category: "M Series",
-        type: "performance",
-        priority: "performance",
-        engine: "4.4L V8",
-        power: "717 HP",
-        speed: "3.4 SEC",
-        topSpeed: "305 KM/H",
-        image: "https://images.unsplash.com/photo-1556189250-72ba954cfc2b?auto=format&fit=crop&w=1000&q=85",
-        description: "A high-performance executive sedan combining luxury and extreme power."
+        series: "M SERIES",
+        year: "2025",
+        type: "Performance Sedan",
+        image: "https://images.unsplash.com/photo-1523983302122-73e869e1f850?auto=format&fit=crop&w=900&q=85",
+        description: "Executive luxury meets extraordinary performance in BMW's iconic M5."
     },
 
     {
-        id: 4,
-        name: "BMW M8 Competition",
-        category: "M Series",
-        type: "performance",
-        priority: "performance",
-        engine: "4.4L V8",
-        power: "617 HP",
-        speed: "3.0 SEC",
-        topSpeed: "305 KM/H",
-        image: "https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?auto=format&fit=crop&w=1000&q=85",
-        description: "BMW's grand touring performance machine with breathtaking acceleration."
+        name: "BMW M8",
+        series: "M SERIES",
+        year: "2025",
+        type: "Luxury Performance",
+        image: "https://images.unsplash.com/photo-1556189250-72ba954cfc2b?auto=format&fit=crop&w=900&q=85",
+        description: "A premium grand tourer delivering dramatic design and exceptional performance."
     },
 
     {
-        id: 5,
-        name: "BMW 3 Series",
-        category: "3 Series",
-        type: "sedan",
-        priority: "comfort",
-        engine: "2.0L Turbo",
-        power: "255 HP",
-        speed: "5.6 SEC",
-        topSpeed: "250 KM/H",
-        image: "https://images.unsplash.com/photo-1523983300217-8d7f6d7a2b3a?auto=format&fit=crop&w=1000&q=85",
-        description: "The iconic BMW sports sedan balancing comfort, technology and driving dynamics."
-    },
-
-    {
-        id: 6,
-        name: "BMW M340i",
-        category: "3 Series",
-        type: "sedan",
-        priority: "performance",
-        engine: "3.0L Turbo",
-        power: "386 HP",
-        speed: "4.1 SEC",
-        topSpeed: "250 KM/H",
-        image: "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=1000&q=85",
-        description: "A performance-focused 3 Series delivering everyday usability and serious speed."
-    },
-
-    {
-        id: 7,
-        name: "BMW 330i",
-        category: "3 Series",
-        type: "sedan",
-        priority: "comfort",
-        engine: "2.0L Turbo",
-        power: "255 HP",
-        speed: "5.6 SEC",
-        topSpeed: "250 KM/H",
-        image: "https://images.unsplash.com/photo-1556189250-72ba954cfc2b?auto=format&fit=crop&w=1000&q=85",
-        description: "A refined sports sedan designed for comfortable daily driving."
-    },
-
-    {
-        id: 8,
-        name: "BMW 5 Series",
-        category: "5 Series",
-        type: "sedan",
-        priority: "luxury",
-        engine: "2.0L Turbo",
-        power: "255 HP",
-        speed: "5.9 SEC",
-        topSpeed: "250 KM/H",
-        image: "https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&w=1000&q=85",
-        description: "Executive luxury, intelligent technology and classic BMW driving dynamics."
-    },
-
-    {
-        id: 9,
-        name: "BMW M550i",
-        category: "5 Series",
-        type: "performance",
-        priority: "performance",
-        engine: "4.4L V8",
-        power: "523 HP",
-        speed: "3.6 SEC",
-        topSpeed: "250 KM/H",
-        image: "https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&w=1000&q=85",
-        description: "Executive luxury meets V8 performance in this powerful sports sedan."
-    },
-
-    {
-        id: 10,
-        name: "BMW 540i",
-        category: "5 Series",
-        type: "sedan",
-        priority: "comfort",
-        engine: "3.0L Turbo",
-        power: "375 HP",
-        speed: "4.9 SEC",
-        topSpeed: "250 KM/H",
-        image: "https://images.unsplash.com/photo-1504215680853-026ed2a45def?auto=format&fit=crop&w=1000&q=85",
-        description: "A sophisticated executive sedan with smooth power and advanced technology."
-    },
-
-    {
-        id: 11,
-        name: "BMW 7 Series",
-        category: "7 Series",
-        type: "luxury",
-        priority: "luxury",
-        engine: "3.0L Turbo",
-        power: "375 HP",
-        speed: "4.9 SEC",
-        topSpeed: "250 KM/H",
-        image: "https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=1000&q=85",
-        description: "BMW flagship luxury with extraordinary comfort and technology."
-    },
-
-    {
-        id: 12,
-        name: "BMW i7",
-        category: "i Series",
-        type: "electric",
-        priority: "electric",
-        engine: "Dual Electric Motor",
-        power: "536 HP",
-        speed: "4.5 SEC",
-        topSpeed: "240 KM/H",
-        image: "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&w=1000&q=85",
-        description: "All-electric flagship luxury with exceptional technology and refinement."
-    },
-
-    {
-        id: 13,
-        name: "BMW X1",
-        category: "X Series",
-        type: "suv",
-        priority: "comfort",
-        engine: "2.0L Turbo",
-        power: "241 HP",
-        speed: "6.2 SEC",
-        topSpeed: "250 KM/H",
-        image: "https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?auto=format&fit=crop&w=1000&q=85",
-        description: "Compact luxury SUV designed for urban adventures and everyday comfort."
-    },
-
-    {
-        id: 14,
         name: "BMW X3",
-        category: "X Series",
-        type: "suv",
-        priority: "comfort",
-        engine: "2.0L Turbo",
-        power: "248 HP",
-        speed: "6.0 SEC",
-        topSpeed: "210 KM/H",
-        image: "https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&w=1000&q=85",
-        description: "A versatile premium SUV combining comfort, practicality and performance."
+        series: "X SERIES",
+        year: "2025",
+        type: "Luxury SUV",
+        image: "https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?auto=format&fit=crop&w=900&q=85",
+        description: "A versatile premium SUV designed for both urban adventures and long journeys."
     },
 
     {
-        id: 15,
         name: "BMW X5",
-        category: "X Series",
-        type: "suv",
-        priority: "luxury",
-        engine: "3.0L Turbo",
-        power: "375 HP",
-        speed: "5.3 SEC",
-        topSpeed: "250 KM/H",
-        image: "https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=1000&q=85",
-        description: "A premium SUV offering commanding presence and refined performance."
+        series: "X SERIES",
+        year: "2025",
+        type: "Luxury SUV",
+        image: "https://images.unsplash.com/photo-1556189250-72ba954cfc2b?auto=format&fit=crop&w=900&q=85",
+        description: "One of BMW's most iconic SUVs combining luxury, comfort and confident road presence."
     },
 
     {
-        id: 16,
         name: "BMW X6",
-        category: "X Series",
-        type: "suv",
-        priority: "luxury",
-        engine: "3.0L Turbo",
-        power: "375 HP",
-        speed: "5.3 SEC",
-        topSpeed: "250 KM/H",
-        image: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=1000&q=85",
-        description: "A bold Sports Activity Coupe with aggressive styling and luxury."
+        series: "X SERIES",
+        year: "2025",
+        type: "Sports Activity Coupe",
+        image: "https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?auto=format&fit=crop&w=900&q=85",
+        description: "Bold coupe-inspired styling combined with the versatility of an SUV."
     },
 
     {
-        id: 17,
         name: "BMW X7",
-        category: "X Series",
-        type: "suv",
-        priority: "luxury",
-        engine: "3.0L Turbo",
-        power: "375 HP",
-        speed: "5.6 SEC",
-        topSpeed: "250 KM/H",
-        image: "https://images.unsplash.com/photo-1568844293986-8c5f8f5a2e45?auto=format&fit=crop&w=1000&q=85",
-        description: "BMW's largest SUV delivering three-row luxury and commanding road presence."
+        series: "X SERIES",
+        year: "2025",
+        type: "Luxury SUV",
+        image: "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=900&q=85",
+        description: "BMW's flagship SUV offering three-row luxury and commanding road presence."
     },
 
     {
-        id: 18,
         name: "BMW i4",
-        category: "i Series",
-        type: "electric",
-        priority: "electric",
-        engine: "Electric Motor",
-        power: "536 HP",
-        speed: "3.9 SEC",
-        topSpeed: "225 KM/H",
-        image: "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&w=1000&q=85",
-        description: "An all-electric Gran Coupe combining performance with zero-emission driving."
+        series: "BMW i",
+        year: "2025",
+        type: "Electric Gran Coupe",
+        image: "https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&fit=crop&w=900&q=85",
+        description: "Electric performance with the unmistakable character of a BMW Gran Coupe."
     },
 
     {
-        id: 19,
         name: "BMW i5",
-        category: "i Series",
-        type: "electric",
-        priority: "electric",
-        engine: "Dual Electric Motor",
-        power: "593 HP",
-        speed: "3.8 SEC",
-        topSpeed: "230 KM/H",
-        image: "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=1000&q=85",
-        description: "The electric executive sedan bringing innovation to the 5 Series."
+        series: "BMW i",
+        year: "2025",
+        type: "Electric Sedan",
+        image: "https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&fit=crop&w=900&q=85",
+        description: "A premium electric sedan combining advanced technology with executive comfort."
     },
 
     {
-        id: 20,
-        name: "BMW iX",
-        category: "i Series",
-        type: "electric",
-        priority: "electric",
-        engine: "Dual Electric Motor",
-        power: "516 HP",
-        speed: "4.6 SEC",
-        topSpeed: "200 KM/H",
-        image: "https://images.unsplash.com/photo-1619767886558-efdc259cde1a?auto=format&fit=crop&w=1000&q=85",
-        description: "A futuristic electric SUV built around technology and sustainable performance."
+        name: "BMW i7",
+        series: "BMW i",
+        year: "2025",
+        type: "Electric Luxury Sedan",
+        image: "https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&fit=crop&w=900&q=85",
+        description: "The electric flagship of BMW's luxury sedan family."
     },
 
     {
-        id: 21,
-        name: "BMW Z4",
-        category: "Z Series",
-        type: "roadster",
-        priority: "performance",
-        engine: "3.0L Turbo",
-        power: "382 HP",
-        speed: "3.9 SEC",
-        topSpeed: "250 KM/H",
-        image: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1000&q=85",
-        description: "A classic two-seat roadster built for open-air driving."
+        name: "BMW i8",
+        series: "BMW i",
+        year: "2020",
+        type: "Hybrid Sports Car",
+        image: "https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&w=900&q=85",
+        description: "A futuristic plug-in hybrid sports car remembered for its dramatic design."
     },
 
     {
-        id: 22,
-        name: "BMW M2",
-        category: "M Series",
-        type: "performance",
-        priority: "performance",
-        engine: "3.0L Twin Turbo",
-        power: "453 HP",
-        speed: "4.1 SEC",
-        topSpeed: "285 KM/H",
-        image: "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=1000&q=85",
-        description: "Compact M performance with a focus on pure driver engagement."
+        name: "BMW 3 Series",
+        series: "3 SERIES",
+        year: "2025",
+        type: "Sports Sedan",
+        image: "https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=900&q=85",
+        description: "One of BMW's most celebrated sports sedans, balancing luxury and driving dynamics."
     },
 
     {
-        id: 23,
-        name: "BMW M8 Coupe",
-        category: "M Series",
-        type: "performance",
-        priority: "performance",
-        engine: "4.4L V8",
-        power: "617 HP",
-        speed: "3.0 SEC",
-        topSpeed: "305 KM/H",
-        image: "https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?auto=format&fit=crop&w=1000&q=85",
-        description: "A luxurious high-performance coupe with extraordinary power."
+        name: "BMW 5 Series",
+        series: "5 SERIES",
+        year: "2025",
+        type: "Executive Sedan",
+        image: "https://images.unsplash.com/photo-1523983302122-73e869e1f850?auto=format&fit=crop&w=900&q=85",
+        description: "Executive comfort, modern technology and classic BMW driving dynamics."
     },
 
     {
-        id: 24,
-        name: "BMW 7 Series M Sport",
-        category: "7 Series",
-        type: "luxury",
-        priority: "luxury",
-        engine: "3.0L Turbo",
-        power: "375 HP",
-        speed: "4.9 SEC",
-        topSpeed: "250 KM/H",
-        image: "https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=1000&q=85",
-        description: "Executive flagship luxury with sporty M styling."
-    },
-
-    {
-        id: 25,
-        name: "BMW X3 M",
-        category: "X Series",
-        type: "suv",
-        priority: "performance",
-        engine: "3.0L Twin Turbo",
-        power: "473 HP",
-        speed: "3.7 SEC",
-        topSpeed: "285 KM/H",
-        image: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=1000&q=85",
-        description: "A performance SUV combining practicality with serious M power."
-    },
-
-    {
-        id: 26,
-        name: "BMW X5 M",
-        category: "X Series",
-        type: "suv",
-        priority: "performance",
-        engine: "4.4L V8",
-        power: "617 HP",
-        speed: "3.7 SEC",
-        topSpeed: "285 KM/H",
-        image: "https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=1000&q=85",
-        description: "High-performance SUV power combined with premium luxury."
-    },
-
-    {
-        id: 27,
-        name: "BMW 840i",
-        category: "5 Series",
-        type: "coupe",
-        priority: "luxury",
-        engine: "3.0L Turbo",
-        power: "335 HP",
-        speed: "4.9 SEC",
-        topSpeed: "250 KM/H",
-        image: "https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&w=1000&q=85",
-        description: "Elegant grand touring performance with luxurious refinement."
-    },
-
-    {
-        id: 28,
-        name: "BMW iX M60",
-        category: "i Series",
-        type: "electric",
-        priority: "electric",
-        engine: "Dual Electric Motor",
-        power: "610 HP",
-        speed: "3.8 SEC",
-        topSpeed: "250 KM/H",
-        image: "https://images.unsplash.com/photo-1619767886558-efdc259cde1a?auto=format&fit=crop&w=1000&q=85",
-        description: "Electric SUV performance with impressive acceleration and technology."
-    },
-
-    {
-        id: 29,
-        name: "BMW M4 CSL",
-        category: "M Series",
-        type: "performance",
-        priority: "performance",
-        engine: "3.0L Twin Turbo",
-        power: "543 HP",
-        speed: "3.7 SEC",
-        topSpeed: "307 KM/H",
-        image: "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=1000&q=85",
-        description: "A lightweight limited-production M car focused on track performance."
-    },
-
-    {
-        id: 30,
-        name: "BMW Z4 M40i",
-        category: "Z Series",
-        type: "roadster",
-        priority: "performance",
-        engine: "3.0L Turbo",
-        power: "382 HP",
-        speed: "3.9 SEC",
-        topSpeed: "250 KM/H",
-        image: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1000&q=85",
-        description: "A powerful roadster designed for open-air performance."
+        name: "BMW 7 Series",
+        series: "7 SERIES",
+        year: "2025",
+        type: "Luxury Sedan",
+        image: "https://images.unsplash.com/photo-1556189250-72ba954cfc2b?auto=format&fit=crop&w=900&q=85",
+        description: "BMW's flagship luxury sedan featuring advanced technology and exceptional comfort."
     }
 
 ];
 
 
-/* =========================================================
+/* ==========================================
    ELEMENTS
-========================================================= */
-
-const grid =
-    document.getElementById("modelGrid");
+   ========================================== */
 
 const searchInput =
-    document.getElementById("searchInput");
+    document.getElementById("modelSearch");
 
-const modelCount =
-    document.getElementById("modelCount");
+const clearButton =
+    document.getElementById("clearSearch");
+
+const modelGrid =
+    document.getElementById("modelGrid");
+
+const resultsSection =
+    document.getElementById("resultsSection");
+
+const searchStatus =
+    document.getElementById("searchStatus");
 
 const noResults =
     document.getElementById("noResults");
 
-const favoritesOnly =
-    document.getElementById("favoritesOnly");
+const resultCount =
+    document.getElementById("resultCount");
 
-const filterButtons =
-    document.querySelectorAll(".filter-btn");
-
-
-let currentCategory = "all";
+const suggestions =
+    document.getElementById("suggestions");
 
 
-/* =========================================================
-   FAVORITES
-========================================================= */
+/* ==========================================
+   SUGGESTIONS
+   ========================================== */
 
-let favorites =
-    JSON.parse(
-        localStorage.getItem(
-            "bmwFavorites"
-        )
-    ) || [];
+const popularModels = [
+    "BMW M3",
+    "BMW M4",
+    "BMW X5",
+    "BMW X7",
+    "BMW i8",
+    "BMW 3 Series",
+    "BMW 7 Series"
+];
 
 
-/* =========================================================
-   RENDER MODELS
-========================================================= */
+popularModels.forEach(model => {
 
-function renderModels() {
+    const button =
+        document.createElement("button");
 
-    const search =
+    button.className = "suggestion";
+
+    button.textContent = model;
+
+    button.type = "button";
+
+    button.addEventListener("click", () => {
+
+        searchInput.value = model;
+
+        searchModels();
+
+        searchInput.focus();
+
+    });
+
+    suggestions.appendChild(button);
+
+});
+
+
+/* ==========================================
+   SEARCH FUNCTION
+   ========================================== */
+
+function searchModels() {
+
+    const searchValue =
         searchInput.value
             .trim()
             .toLowerCase();
 
 
-    let filtered =
+    /*
+       IMPORTANT:
+
+       If search box is empty,
+       hide ALL BMW pictures.
+    */
+
+    if (searchValue === "") {
+
+        modelGrid.innerHTML = "";
+
+        resultsSection.classList.add("hidden");
+
+        noResults.classList.add("hidden");
+
+        searchStatus.classList.remove("hidden");
+
+        resultCount.textContent = "0 Models";
+
+        return;
+    }
+
+
+    /* ======================================
+       FIND MATCHING MODELS
+       ====================================== */
+
+    const matches =
         bmwModels.filter(model => {
 
-
-            const matchesSearch =
-
-                model.name
-                    .toLowerCase()
-                    .includes(search)
-
-                ||
-
-                model.category
-                    .toLowerCase()
-                    .includes(search)
-
-                ||
-
-                model.type
-                    .toLowerCase()
-                    .includes(search);
-
-
-            const matchesCategory =
-
-                currentCategory === "all"
-
-                ||
-
-                model.category ===
-                currentCategory;
-
-
-            const matchesFavorite =
-
-                !favoritesOnly.checked
-
-                ||
-
-                favorites.includes(
-                    model.id
-                );
-
-
             return (
-                matchesSearch &&
-                matchesCategory &&
-                matchesFavorite
+                model.name.toLowerCase().includes(searchValue) ||
+                model.series.toLowerCase().includes(searchValue) ||
+                model.type.toLowerCase().includes(searchValue)
             );
 
         });
 
 
-    grid.innerHTML = "";
+    /* ======================================
+       NO RESULTS
+       ====================================== */
 
+    if (matches.length === 0) {
 
-    modelCount.textContent =
-        filtered.length;
+        modelGrid.innerHTML = "";
 
+        resultsSection.classList.add("hidden");
 
-    if (filtered.length === 0) {
+        searchStatus.classList.add("hidden");
 
-        noResults.classList.add(
-            "show"
-        );
+        noResults.classList.remove("hidden");
+
+        resultCount.textContent = "0 Models";
 
         return;
-
     }
 
 
-    noResults.classList.remove(
-        "show"
-    );
+    /* ======================================
+       RESULTS FOUND
+       ====================================== */
+
+    searchStatus.classList.add("hidden");
+
+    noResults.classList.add("hidden");
+
+    resultsSection.classList.remove("hidden");
 
 
-    filtered.forEach(model => {
+    resultCount.textContent =
+        `${matches.length} Model${matches.length !== 1 ? "s" : ""}`;
 
-        const isFavorite =
-            favorites.includes(
-                model.id
-            );
 
+    modelGrid.innerHTML = "";
+
+
+    matches.forEach((model, index) => {
 
         const card =
-            document.createElement(
-                "article"
-            );
+            document.createElement("article");
 
+        card.className = "model-card";
 
-        card.className =
-            "model-card";
+        card.style.animationDelay =
+            `${index * 0.06}s`;
 
 
         card.innerHTML = `
 
-            <div class="card-image">
+            <div class="image-wrapper">
 
                 <img
                     src="${model.image}"
                     alt="${model.name}"
+                    class="model-image"
                     loading="lazy"
                 >
 
-                <div
-                    class="card-overlay"
-                ></div>
-
-
-                <button
-                    class="favorite-btn ${
-                        isFavorite
-                            ? "favorited"
-                            : ""
-                    }"
-                    data-id="${model.id}"
-                    title="Favorite"
-                >
-                    ${
-                        isFavorite
-                            ? "♥"
-                            : "♡"
-                    }
-                </button>
+                <span class="series-badge">
+                    ${model.series}
+                </span>
 
             </div>
 
 
-            <div class="card-content">
-
-                <span
-                    class="card-category"
-                >
-                    ${model.category}
-                </span>
-
+            <div class="model-content">
 
                 <h3>
                     ${model.name}
                 </h3>
 
+                <div class="model-year">
+                    ${model.year}
+                </div>
 
-                <p
-                    class="card-description"
-                >
+                <p class="model-description">
                     ${model.description}
                 </p>
 
 
-                <div class="card-specs">
+                <div class="model-footer">
 
-                    <div>
+                    <span class="model-type">
+                        ${model.type}
+                    </span>
 
-                        <span>
-                            Power
-                        </span>
-
-                        <strong>
-                            ${model.power}
-                        </strong>
-
-                    </div>
-
-
-                    <div>
-
-                        <span>
-                            0-100
-                        </span>
-
-                        <strong>
-                            ${model.speed}
-                        </strong>
-
-                    </div>
-
-
-                    <div>
-
-                        <span>
-                            Engine
-                        </span>
-
-                        <strong>
-                            ${model.engine.split(" ")[0]}
-                        </strong>
-
-                    </div>
+                    <span class="explore-btn">
+                        BMW MODEL →
+                    </span>
 
                 </div>
-
-
-                <button
-                    class="view-btn"
-                    data-id="${model.id}"
-                >
-                    VIEW DETAILS →
-                </button>
 
             </div>
 
         `;
 
 
-        grid.appendChild(card);
+        modelGrid.appendChild(card);
 
     });
 
-
-    attachCardEvents();
-
 }
 
 
-/* =========================================================
-   CARD EVENTS
-========================================================= */
-
-function attachCardEvents() {
-
-
-    document
-        .querySelectorAll(
-            ".favorite-btn"
-        )
-        .forEach(button => {
-
-            button.addEventListener(
-                "click",
-                event => {
-
-                    event.stopPropagation();
-
-                    const id =
-                        Number(
-                            button.dataset.id
-                        );
-
-                    toggleFavorite(id);
-
-                }
-            );
-
-        });
-
-
-    document
-        .querySelectorAll(
-            ".view-btn"
-        )
-        .forEach(button => {
-
-            button.addEventListener(
-                "click",
-                () => {
-
-                    const id =
-                        Number(
-                            button.dataset.id
-                        );
-
-                    openModal(id);
-
-                }
-            );
-
-        });
-
-}
-
-
-/* =========================================================
-   FAVORITE
-========================================================= */
-
-function toggleFavorite(id) {
-
-    if (
-        favorites.includes(id)
-    ) {
-
-        favorites =
-            favorites.filter(
-                item => item !== id
-            );
-
-    } else {
-
-        favorites.push(id);
-
-    }
-
-
-    localStorage.setItem(
-        "bmwFavorites",
-        JSON.stringify(favorites)
-    );
-
-
-    renderModels();
-
-}
-
-
-/* =========================================================
-   FILTER
-========================================================= */
-
-filterButtons.forEach(button => {
-
-    button.addEventListener(
-        "click",
-        () => {
-
-            filterButtons.forEach(
-                btn =>
-                    btn.classList.remove(
-                        "active"
-                    )
-            );
-
-
-            button.classList.add(
-                "active"
-            );
-
-
-            currentCategory =
-                button.dataset.category;
-
-
-            renderModels();
-
-        }
-    );
-
-});
-
-
-/* =========================================================
-   SEARCH
-========================================================= */
+/* ==========================================
+   LIVE SEARCH
+   ========================================== */
 
 searchInput.addEventListener(
     "input",
-    renderModels
+    searchModels
 );
 
 
-/* =========================================================
-   FAVORITES FILTER
-========================================================= */
+/* ==========================================
+   CLEAR SEARCH
+   ========================================== */
 
-favoritesOnly.addEventListener(
-    "change",
-    renderModels
-);
-
-
-/* =========================================================
-   MODAL
-========================================================= */
-
-const modal =
-    document.getElementById(
-        "modelModal"
-    );
-
-const modalImage =
-    document.getElementById(
-        "modalImage"
-    );
-
-const modalName =
-    document.getElementById(
-        "modalName"
-    );
-
-const modalCategory =
-    document.getElementById(
-        "modalCategory"
-    );
-
-const modalDescription =
-    document.getElementById(
-        "modalDescription"
-    );
-
-const modalEngine =
-    document.getElementById(
-        "modalEngine"
-    );
-
-const modalPower =
-    document.getElementById(
-        "modalPower"
-    );
-
-const modalSpeed =
-    document.getElementById(
-        "modalSpeed"
-    );
-
-const modalTopSpeed =
-    document.getElementById(
-        "modalTopSpeed"
-    );
-
-const modalClose =
-    document.getElementById(
-        "modalClose"
-    );
-
-const modalFavorite =
-    document.getElementById(
-        "modalFavorite"
-    );
-
-
-let currentModalId = null;
-
-
-/* OPEN */
-
-function openModal(id) {
-
-    const model =
-        bmwModels.find(
-            item => item.id === id
-        );
-
-
-    if (!model) return;
-
-
-    currentModalId = id;
-
-
-    modalImage.src =
-        model.image;
-
-
-    modalImage.alt =
-        model.name;
-
-
-    modalName.textContent =
-        model.name;
-
-
-    modalCategory.textContent =
-        model.category;
-
-
-    modalDescription.textContent =
-        model.description;
-
-
-    modalEngine.textContent =
-        model.engine;
-
-
-    modalPower.textContent =
-        model.power;
-
-
-    modalSpeed.textContent =
-        model.speed;
-
-
-    modalTopSpeed.textContent =
-        model.topSpeed;
-
-
-    updateModalFavorite();
-
-
-    modal.classList.add(
-        "show"
-    );
-
-
-    document.body.style.overflow =
-        "hidden";
-
-}
-
-
-/* CLOSE */
-
-function closeModal() {
-
-    modal.classList.remove(
-        "show"
-    );
-
-
-    document.body.style.overflow =
-        "";
-
-}
-
-
-modalClose.addEventListener(
+clearButton.addEventListener(
     "click",
-    closeModal
+    () => {
+
+        searchInput.value = "";
+
+        searchModels();
+
+        searchInput.focus();
+
+    }
 );
 
 
-document
-    .querySelector(".modal-overlay")
-    .addEventListener(
-        "click",
-        closeModal
-    );
-
+/* ==========================================
+   KEYBOARD SHORTCUT
+   ========================================== */
 
 document.addEventListener(
     "keydown",
     event => {
 
         if (
-            event.key === "Escape"
+            event.key === "/" &&
+            document.activeElement !== searchInput
         ) {
 
-            closeModal();
+            event.preventDefault();
+
+            searchInput.focus();
 
         }
-
-    }
-);
-
-
-/* =========================================================
-   MODAL FAVORITE
-========================================================= */
-
-function updateModalFavorite() {
-
-    if (
-        favorites.includes(
-            currentModalId
-        )
-    ) {
-
-        modalFavorite.textContent =
-            "♥ Remove from Favorites";
-
-    } else {
-
-        modalFavorite.textContent =
-            "♡ Add to Favorites";
-
-    }
-
-}
-
-
-modalFavorite.addEventListener(
-    "click",
-    () => {
-
-        toggleFavorite(
-            currentModalId
-        );
-
-        updateModalFavorite();
-
-    }
-);
-
-
-/* =========================================================
-   BMW FINDER
-========================================================= */
-
-const finderType =
-    document.getElementById(
-        "finderType"
-    );
-
-const finderPriority =
-    document.getElementById(
-        "finderPriority"
-    );
-
-const findBmwBtn =
-    document.getElementById(
-        "findBmwBtn"
-    );
-
-const finderResult =
-    document.getElementById(
-        "finderResult"
-    );
-
-const finderName =
-    document.getElementById(
-        "finderName"
-    );
-
-const finderDescription =
-    document.getElementById(
-        "finderDescription"
-    );
-
-const finderViewBtn =
-    document.getElementById(
-        "finderViewBtn"
-    );
-
-
-let recommendedModel = null;
-
-
-/* FIND BMW */
-
-findBmwBtn.addEventListener(
-    "click",
-    () => {
-
-        const type =
-            finderType.value;
-
-        const priority =
-            finderPriority.value;
-
-
-        let matches =
-            bmwModels.filter(
-                model => {
-
-                    const typeMatch =
-
-                        type === "all"
-
-                        ||
-
-                        (
-                            type ===
-                            "M Series"
-
-                            &&
-                            model.category ===
-                            "M Series"
-                        )
-
-                        ||
-
-                        (
-                            type ===
-                            "X Series"
-
-                            &&
-                            model.category ===
-                            "X Series"
-                        )
-
-                        ||
-
-                        (
-                            type ===
-                            "3 Series"
-
-                            &&
-                            model.category ===
-                            "3 Series"
-                        )
-
-                        ||
-
-                        (
-                            type ===
-                            "i Series"
-
-                            &&
-                            model.category ===
-                            "i Series"
-                        )
-
-                        ||
-
-                        (
-                            type ===
-                            "Z Series"
-
-                            &&
-                            model.category ===
-                            "Z Series"
-                        );
-
-
-                    return typeMatch;
-
-                }
-            );
-
-
-        const priorityMatches =
-            matches.filter(
-                model =>
-                    model.priority ===
-                    priority
-            );
-
 
         if (
-            priorityMatches.length
+            event.key === "Escape" &&
+            document.activeElement === searchInput
         ) {
 
-            matches =
-                priorityMatches;
+            searchInput.value = "";
 
-        }
-
-
-        recommendedModel =
-            matches[
-                Math.floor(
-                    Math.random() *
-                    matches.length
-                )
-            ];
-
-
-        if (!recommendedModel) {
-
-            recommendedModel =
-                bmwModels[0];
-
-        }
-
-
-        finderName.textContent =
-            recommendedModel.name;
-
-
-        finderDescription.textContent =
-            recommendedModel.description;
-
-
-        finderResult.scrollIntoView({
-            behavior: "smooth",
-            block: "center"
-        });
-
-    }
-);
-
-
-/* VIEW RECOMMENDED BMW */
-
-finderViewBtn.addEventListener(
-    "click",
-    () => {
-
-        if (
-            recommendedModel
-        ) {
-
-            openModal(
-                recommendedModel.id
-            );
+            searchModels();
 
         }
 
@@ -1252,8 +436,8 @@ finderViewBtn.addEventListener(
 );
 
 
-/* =========================================================
-   INITIAL RENDER
-========================================================= */
+/* ==========================================
+   INITIAL STATE
+   ========================================== */
 
-renderModels();
+searchModels();
