@@ -670,3 +670,224 @@ footer {
     }
 
 }
+
+/* ==========================================
+CONFIGURE BMW CTA (ENHANCED)
+========================================== */
+.configure-cta {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin: 28px 0;
+  padding: 24px;
+  border-radius: 16px;
+  
+  /* Modern frosted glass aesthetic */
+  background: 
+    linear-gradient(
+      135deg,
+      rgba(28, 105, 212, 0.12),
+      rgba(28, 105, 212, 0.02)
+    );
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(28, 105, 212, 0.3);
+  overflow: hidden;
+
+  /* Smooth cubic-bezier transitions */
+  transition: 
+    border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Ambient dynamic glow spot */
+.configure-cta::before {
+  content: "";
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  right: -60px;
+  top: -80px;
+  background: radial-gradient(circle, rgba(28, 105, 212, 0.35) 0%, rgba(28, 105, 212, 0) 70%);
+  border-radius: 50%;
+  filter: blur(20px);
+  pointer-events: none;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
+  opacity: 0.7;
+}
+
+/* Moving light sheen effect on hover */
+.configure-cta::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.08),
+    transparent
+  );
+  transform: skewX(-20deg);
+  transition: left 0.85s ease;
+  pointer-events: none;
+}
+
+.configure-cta:hover {
+  transform: translateY(-4px);
+  border-color: rgba(28, 105, 212, 0.75);
+  box-shadow: 
+    0 20px 40px -15px rgba(28, 105, 212, 0.25),
+    0 0 15px rgba(28, 105, 212, 0.1);
+}
+
+.configure-cta:hover::before {
+  transform: scale(1.25) translate(-10px, 10px);
+  opacity: 1;
+}
+
+.configure-cta:hover::after {
+  left: 150%;
+}
+
+/* Active click feedback */
+.configure-cta:active {
+  transform: translateY(-1px);
+  transition-duration: 0.1s;
+}
+
+/* ==========================================
+CONFIGURE ICON
+========================================== */
+.configure-cta-icon {
+  flex-shrink: 0;
+  width: 54px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(28, 105, 212, 0.15);
+  border: 1px solid rgba(28, 105, 212, 0.4);
+  color: var(--primary, #1c69d4);
+  font-size: 1.35rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: 
+    transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+    background 0.3s ease,
+    color 0.3s ease;
+}
+
+.configure-cta:hover .configure-cta-icon {
+  transform: rotate(180deg) scale(1.08);
+  background: var(--primary, #1c69d4);
+  color: #ffffff;
+}
+
+/* ==========================================
+CTA CONTENT
+========================================== */
+.configure-cta-content {
+  flex: 1;
+  position: relative;
+  z-index: 2;
+}
+
+.configure-cta-content span {
+  display: inline-block;
+  color: var(--primary, #1c69d4);
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.configure-cta-content h3 {
+  margin: 0 0 4px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.configure-cta-content p {
+  margin: 0;
+  color: var(--text-muted, #666666);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+/* ==========================================
+CONFIGURE BUTTON
+========================================== */
+.configure-cta-button {
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  border-radius: 8px;
+  background: var(--primary, #1c69d4);
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  box-shadow: 0 4px 14px rgba(28, 105, 212, 0.35);
+  transition: 
+    background 0.3s ease,
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s ease;
+}
+
+.configure-cta-button strong {
+  display: inline-block;
+  font-size: 0.95rem;
+  line-height: 1;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.configure-cta-button:hover {
+  background: var(--primary-hover, #1252ab);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(28, 105, 212, 0.45);
+}
+
+.configure-cta-button:hover strong {
+  transform: translateX(5px);
+}
+
+.configure-cta-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(28, 105, 212, 0.3);
+}
+
+/* ==========================================
+MOBILE RESPONSIVENESS
+========================================== */
+@media (max-width: 650px) {
+  .configure-cta {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px;
+  }
+
+  .configure-cta-icon {
+    width: 46px;
+    height: 46px;
+    font-size: 1.15rem;
+  }
+
+  .configure-cta-button {
+    width: 100%;
+    justify-content: center;
+    padding: 14px;
+  }
+}
