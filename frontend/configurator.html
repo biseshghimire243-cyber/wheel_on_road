@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<title>BMW Journey | Configurator</title>
+
+<link rel="stylesheet" href="css/configurator.css">
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet"
+>
+```
+
+</head>
+
+<body>
+
+```
+<!-- =========================
+     NAVBAR
+========================== -->
+
+<header class="navbar">
+
+    <div class="logo">
+        <span class="logo-icon">✦</span>
+
+        <span>
+            BMW <b>JOURNEY</b>
+        </span>
+    </div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="journey.html">Journey</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="configurator.html" class="active">Configurator</a>
+        <a href="book.html">Book a BMW</a>
+        <a href="about.html">About</a>
+    </nav>
+
+</header>
+
+
+<!-- =========================
+     HERO
+========================== -->
+
+<section class="configurator-hero">
+
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+
+        <span class="eyebrow">
+            BMW INDIVIDUAL
+        </span>
+
+        <h1>
+            Build Your <span>BMW.</span>
+        </h1>
+
+        <p>
+            Configure your BMW exactly the way you want it.
+            Choose your model, color, wheels and interior.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     CONFIGURATOR
+========================== -->
+
+<main class="configurator-container">
+
+
+    <!-- =========================
+         CAR PREVIEW
+    ========================== -->
+
+    <section class="car-preview">
+
+        <div class="preview-top">
+
+            <div>
+                <span class="section-label">
+                    YOUR CONFIGURATION
+                </span>
+
+                <h2 id="previewModel">
+                    BMW M5
+                </h2>
+            </div>
+
+            <div class="preview-badge">
+                <span>BMW</span>
+                <strong>M</strong>
+            </div>
+
+        </div>
+
+
+        <!-- CAR IMAGE -->
+
+        <div class="car-image-container">
+
+            <div class="image-glow"></div>
+
+            <img
+                id="carImage"
+                src="https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=1400&q=90"
+                alt="BMW"
+            >
+
+        </div>
+
+
+        <!-- CAR BASIC SPECS -->
+
+        <div class="quick-specs">
+
+            <div>
+                <span>POWER</span>
+                <strong id="power">
+                    625 HP
+                </strong>
+            </div>
+
+            <div>
+                <span>0-100 KM/H</span>
+                <strong id="acceleration">
+                    3.4 SEC
+                </strong>
+            </div>
+
+            <div>
+                <span>DRIVE</span>
+                <strong>
+                    xDRIVE
+                </strong>
+            </div>
+
+            <div>
+                <span>TRANSMISSION</span>
+                <strong>
+                    AUTOMATIC
+                </strong>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         OPTIONS
+    ========================== -->
+
+    <section class="options-panel">
+
+        <div class="options-header">
+
+            <span class="section-label">
+                PERSONALIZE
+            </span>
+
+            <h2>
+                Configure
+            </h2>
+
+            <p>
+                Make it yours.
+            </p>
+
+        </div>
+
+
+        <!-- MODEL -->
+
+        <div class="option-section">
+
+            <div class="option-title">
+
+                <span>
+                    01
+                </span>
+
+                <h3>
+                    Select Model
+                </h3>
+
+            </div>
+
+
+            <div class="model-options">
+
+                <button
+                    class="model-option active"
+                    data-model="BMW M5"
+                    data-price="109900"
+                    data-image="https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=1400&q=90"
+                    data-power="625 HP"
+                    data-acceleration="3.4 SEC"
+                >
+                    <strong>M5</strong>
+                    <small>
+                        Performance Sedan
+                    </small>
+                </button>
+
+
+                <button
+                    class="model-option"
+                    data-model="BMW M4"
+                    data-price="79900"
+                    data-image="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=1400&q=90"
+                    data-power="503 HP"
+                    data-acceleration="3.4 SEC"
+                >
+                    <strong>M4</strong>
+                    <small>
+                        Performance Coupe
+                    </small>
+                </button>
+
+
+                <button
+                    class="model-option"
+                    data-model="BMW X5"
+                    data-price="68000"
+                    data-image="https://images.unsplash.com/photo-1556189250-72ba954cfc2b?auto=format&fit=crop&w=1400&q=90"
+                    data-power="375 HP"
+                    data-acceleration="5.3 SEC"
+                >
+                    <strong>X5</strong>
+                    <small>
+                        Luxury SUV
+                    </small>
+                </button>
+
+
+                <button
+                    class="model-option"
+                    data-model="BMW i7"
+                    data-price="105700"
+                    data-image="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=1400&q=90"
+                    data-power="536 HP"
+                    data-acceleration="4.5 SEC"
+                >
+                    <strong>i7</strong>
+                    <small>
+                        Electric Luxury
+                    </small>
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- EXTERIOR COLOR -->
+
+        <div class="option-section">
+
+            <div class="option-title">
+
+                <span>
+                    02
+                </span>
+
+                <h3>
+                    Exterior Color
+                </h3>
+
+            </div>
+
+
+            <div class="color-options">
+
+                <button
+                    class="color-option active"
+                    data-color="Alpine White"
+                    data-add="0"
+                >
+                    <span class="color-dot white"></span>
+                    <small>Alpine White</small>
+                </button>
+
+
+                <button
+                    class="color-option"
+                    data-color="Black Sapphire"
+                    data-add="550"
+                >
+                    <span class="color-dot black"></span>
+                    <small>Black Sapphire</small>
+                </button>
+
+
+                <button
+                    class="color-option"
+                    data-color="Portimao Blue"
+                    data-add="650"
+                >
+                    <span class="color-dot blue"></span>
+                    <small>Portimao Blue</small>
+                </button>
+
+
+                <button
+                    class="color-option"
+                    data-color="Toronto Red"
+                    data-add="650"
+                >
+                    <span class="color-dot red"></span>
+                    <small>Toronto Red</small>
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- WHEELS -->
+
+        <div class="option-section">
+
+            <div class="option-title">
+
+                <span>
+                    03
+                </span>
+
+                <h3>
+                    Wheels
+                </h3>
+
+            </div>
+
+
+            <div class="select-options">
+
+                <label class="select-card active">
+
+                    <input
+                        type="radio"
+                        name="wheels"
+                        value="19-inch M Wheels"
+                        data-price="0"
+                        checked
+                    >
+
+                    <div>
+                        <strong>
+                            19" M Wheels
+                        </strong>
+
+                        <small>
+                            Standard
+                        </small>
+                    </div>
+
+                    <span>
+                        Included
+                    </span>
+
+                </label>
+
+
+                <label class="select-card">
+
+                    <input
+                        type="radio"
+                        name="wheels"
+                        value="20-inch Performance Wheels"
+                        data-price="2500"
+                    >
+
+                    <div>
+                        <strong>
+                            20" Performance
+                        </strong>
+
+                        <small>
+                            Sport Package
+                        </small>
+                    </div>
+
+                    <span>
+                        +$2,500
+                    </span>
+
+                </label>
+
+
+                <label class="select-card">
+
+                    <input
+                        type="radio"
+                        name="wheels"
+                        value="21-inch M Competition Wheels"
+                        data-price="4200"
+                    >
+
+                    <div>
+                        <strong>
+                            21" M Competition
+                        </strong>
+
+                        <small>
+                            Premium Package
+                        </small>
+                    </div>
+
+                    <span>
+                        +$4,200
+                    </span>
+
+                </label>
+
+            </div>
+
+        </div>
+
+
+        <!-- INTERIOR -->
+
+        <div class="option-section">
+
+            <div class="option-title">
+
+                <span>
+                    04
+                </span>
+
+                <h3>
+                    Interior
+                </h3>
+
+            </div>
+
+
+            <div class="interior-options">
+
+                <button
+                    class="interior-option active"
+                    data-interior="Black Leather"
+                    data-price="0"
+                >
+                    <span class="interior-black"></span>
+
+                    <strong>
+                        Black Leather
+                    </strong>
+
+                    <small>
+                        Included
+                    </small>
+                </button>
+
+
+                <button
+                    class="interior-option"
+                    data-interior="Tan Merino Leather"
+                    data-price="2500"
+                >
+                    <span class="interior-tan"></span>
+
+                    <strong>
+                        Tan Merino
+                    </strong>
+
+                    <small>
+                        +$2,500
+                    </small>
+                </button>
+
+
+                <button
+                    class="interior-option"
+                    data-interior="Red Merino Leather"
+                    data-price="3000"
+                >
+                    <span class="interior-red"></span>
+
+                    <strong>
+                        Red Merino
+                    </strong>
+
+                    <small>
+                        +$3,000
+                    </small>
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- SUMMARY -->
+
+        <div class="configuration-summary">
+
+            <div class="summary-heading">
+
+                <span>
+                    YOUR BMW
+                </span>
+
+                <strong id="summaryModel">
+                    BMW M5
+                </strong>
+
+            </div>
+
+
+            <div class="summary-row">
+
+                <span>
+                    Exterior
+                </span>
+
+                <strong id="summaryColor">
+                    Alpine White
+                </strong>
+
+            </div>
+
+
+            <div class="summary-row">
+
+                <span>
+                    Wheels
+                </span>
+
+                <strong id="summaryWheels">
+                    19" M Wheels
+                </strong>
+
+            </div>
+
+
+            <div class="summary-row">
+
+                <span>
+                    Interior
+                </span>
+
+                <strong id="summaryInterior">
+                    Black Leather
+                </strong>
+
+            </div>
+
+
+            <div class="price-row">
+
+                <span>
+                    ESTIMATED PRICE
+                </span>
+
+                <strong id="totalPrice">
+                    $109,900
+                </strong>
+
+            </div>
+
+
+            <button
+                id="bookButton"
+                class="book-button"
+            >
+                Book This BMW
+                <span>→</span>
+            </button>
+
+
+            <button
+                id="resetButton"
+                class="reset-button"
+            >
+                Reset Configuration
+            </button>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- =========================
+     FOOTER
+========================== -->
+
+<footer>
+
+    <div class="footer-logo">
+        BMW JOURNEY
+    </div>
+
+    <p>
+        Drive. Explore. Remember.
+    </p>
+
+    <span>
+        &copy; 2026 BMW Journey Project
+    </span>
+
+</footer>
+
+
+<script src="js/configurator.js"></script>
+```
+
+</body>
+</html>
