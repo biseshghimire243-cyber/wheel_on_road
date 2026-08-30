@@ -3,649 +3,223 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>BMW Journey | Book a BMW</title>
-
     <link rel="stylesheet" href="css/book.css">
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet"
-    >
+    <link href="[https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap](https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap)" rel="stylesheet">
 </head>
-
 <body>
 
-    <!-- =========================
-         NAVBAR
-    ========================== -->
-
+    <!-- NAVBAR -->
     <header class="navbar">
-
         <div class="logo">
-
             <span class="logo-icon">✦</span>
-
-            <span>
-                BMW <b>JOURNEY</b>
-            </span>
-
+            <span>BMW <b>JOURNEY</b></span>
         </div>
-
         <nav>
-
             <a href="index.html">Home</a>
-
             <a href="journey.html">Journey</a>
-
             <a href="gallery.html">Gallery</a>
-
             <a href="book.html" class="active">Book a BMW</a>
-
             <a href="about.html">About</a>
-
             <a href="contact.html">Contact</a>
-
         </nav>
-
     </header>
 
-
-    <!-- =========================
-         HERO
-    ========================== -->
-
+    <!-- HERO SECTION -->
     <section class="book-hero">
-
         <div class="hero-overlay"></div>
-
         <div class="hero-content">
-
-            <span class="eyebrow">
-                THE ULTIMATE DRIVING EXPERIENCE
-            </span>
-
-            <h1>
-                Book Your <span>BMW.</span>
-            </h1>
-
-            <p>
-                Choose your BMW, select your preferred date,
-                and request a personalized test drive.
-            </p>
-
+            <span class="eyebrow">THE ULTIMATE DRIVING EXPERIENCE</span>
+            <h1>Book Your <span>BMW.</span></h1>
+            <p>Choose your BMW, select your preferred date, and request a personalized test drive.</p>
         </div>
-
     </section>
 
-
-    <!-- =========================
-         MAIN BOOKING AREA
-    ========================== -->
-
+    <!-- MAIN BOOKING CONTAINER -->
     <main class="booking-container">
 
-
         <!-- LEFT INFORMATION -->
-
         <section class="booking-info">
-
-            <span class="section-label">
-                EXPERIENCE BMW
-            </span>
-
-            <h2>
-                Your next drive
-                <span>starts here.</span>
-            </h2>
-
-            <p>
-                Discover the feeling of driving a BMW.
-                Select your preferred model and schedule
-                a test-drive experience.
-            </p>
-
-
-            <!-- FEATURES -->
+            <span class="section-label">EXPERIENCE BMW</span>
+            <h2>Your next drive <span>starts here.</span></h2>
+            <p>Discover the feeling of driving a BMW. Select your preferred model and schedule a test-drive experience.</p>
 
             <div class="booking-features">
-
                 <div class="info-item">
-
-                    <div class="info-icon">
-                        🚘
-                    </div>
-
+                    <div class="info-icon">🚘</div>
                     <div>
                         <h3>Choose Your BMW</h3>
-
-                        <p>
-                            Select from a range of BMW
-                            models available for your experience.
-                        </p>
+                        <p>Select from a range of BMW models available for your experience.</p>
                     </div>
-
                 </div>
 
-
                 <div class="info-item">
-
-                    <div class="info-icon">
-                        📅
-                    </div>
-
+                    <div class="info-icon">📅</div>
                     <div>
                         <h3>Pick Your Date</h3>
-
-                        <p>
-                            Choose a convenient date and time
-                            for your test drive.
-                        </p>
+                        <p>Choose a convenient date and time for your test drive.</p>
                     </div>
-
                 </div>
-
 
                 <div class="info-item">
-
-                    <div class="info-icon">
-                        🏁
-                    </div>
-
+                    <div class="info-icon">🏁</div>
                     <div>
                         <h3>Enjoy the Drive</h3>
-
-                        <p>
-                            Experience the performance,
-                            technology and comfort of BMW.
-                        </p>
+                        <p>Experience the performance, technology, and comfort of BMW.</p>
                     </div>
-
                 </div>
-
             </div>
-
-
-            <!-- QUOTE -->
 
             <div class="drive-quote">
-
                 <span>BMW JOURNEY</span>
-
-                <h3>
-                    "The road is yours.
-                    Make every kilometer count."
-                </h3>
-
+                <h3>"The road is yours. Make every kilometer count."</h3>
             </div>
-
         </section>
 
-
-
-        <!-- =========================
-             BOOKING FORM
-        ========================== -->
-
+        <!-- BOOKING FORM -->
         <section class="booking-card">
-
             <div class="form-header">
-
-                <span class="section-label">
-                    TEST DRIVE REQUEST
-                </span>
-
-                <h2>
-                    Book a BMW
-                </h2>
-
-                <p>
-                    Fill in your details and we'll
-                    take care of the rest.
-                </p>
-
+                <span class="section-label">TEST DRIVE REQUEST</span>
+                <h2>Book a BMW</h2>
+                <p>Fill in your details and we'll take care of the rest.</p>
             </div>
 
-
             <form id="bookingForm">
-
-
-                <!-- BMW MODEL -->
-
                 <div class="form-group">
-
-                    <label for="model">
-                        BMW MODEL
-                    </label>
-
+                    <label for="model">BMW MODEL</label>
                     <select id="model" name="model" required>
-
-                        <option value="">
-                            Select BMW Model
-                        </option>
-
-                        <option value="BMW 2 Series">
-                            BMW 2 Series
-                        </option>
-
-                        <option value="BMW 3 Series">
-                            BMW 3 Series
-                        </option>
-
-                        <option value="BMW 4 Series">
-                            BMW 4 Series
-                        </option>
-
-                        <option value="BMW 5 Series">
-                            BMW 5 Series
-                        </option>
-
-                        <option value="BMW 7 Series">
-                            BMW 7 Series
-                        </option>
-
-                        <option value="BMW X1">
-                            BMW X1
-                        </option>
-
-                        <option value="BMW X3">
-                            BMW X3
-                        </option>
-
-                        <option value="BMW X5">
-                            BMW X5
-                        </option>
-
-                        <option value="BMW X7">
-                            BMW X7
-                        </option>
-
-                        <option value="BMW M4">
-                            BMW M4
-                        </option>
-
-                        <option value="BMW M5">
-                            BMW M5
-                        </option>
-
-                        <option value="BMW i4">
-                            BMW i4
-                        </option>
-
-                        <option value="BMW i5">
-                            BMW i5
-                        </option>
-
-                        <option value="BMW i7">
-                            BMW i7
-                        </option>
-
+                        <option value="">Select BMW Model</option>
+                        <option value="BMW 2 Series">BMW 2 Series</option>
+                        <option value="BMW 3 Series">BMW 3 Series</option>
+                        <option value="BMW 4 Series">BMW 4 Series</option>
+                        <option value="BMW 5 Series">BMW 5 Series</option>
+                        <option value="BMW 7 Series">BMW 7 Series</option>
+                        <option value="BMW X1">BMW X1</option>
+                        <option value="BMW X3">BMW X3</option>
+                        <option value="BMW X5">BMW X5</option>
+                        <option value="BMW X7">BMW X7</option>
+                        <option value="BMW M4">BMW M4</option>
+                        <option value="BMW M5">BMW M5</option>
+                        <option value="BMW i4">BMW i4</option>
+                        <option value="BMW i5">BMW i5</option>
+                        <option value="BMW i7">BMW i7</option>
                     </select>
-
                 </div>
-
-
-                <!-- NAME -->
 
                 <div class="form-group">
-
-                    <label for="name">
-                        FULL NAME
-                    </label>
-
-                    <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        placeholder="Enter your full name"
-                        required
-                    >
-
+                    <label for="name">FULL NAME</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your full name" required>
                 </div>
-
-
-                <!-- EMAIL -->
 
                 <div class="form-group">
-
-                    <label for="email">
-                        EMAIL ADDRESS
-                    </label>
-
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        placeholder="example@email.com"
-                        required
-                    >
-
+                    <label for="email">EMAIL ADDRESS</label>
+                    <input type="email" id="email" name="email" placeholder="example@email.com" required>
                 </div>
-
-
-                <!-- PHONE -->
 
                 <div class="form-group">
-
-                    <label for="phone">
-                        PHONE NUMBER
-                    </label>
-
-                    <input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        placeholder="+977 98XXXXXXXX"
-                        required
-                    >
-
+                    <label for="phone">PHONE NUMBER</label>
+                    <input type="tel" id="phone" name="phone" placeholder="+977 98XXXXXXXX" required>
                 </div>
-
-
-                <!-- DATE + TIME -->
 
                 <div class="form-row">
-
                     <div class="form-group">
-
-                        <label for="bookingDate">
-                            PREFERRED DATE
-                        </label>
-
-                        <input
-                            type="date"
-                            id="bookingDate"
-                            name="bookingDate"
-                            required
-                        >
-
+                        <label for="bookingDate">PREFERRED DATE</label>
+                        <input type="date" id="bookingDate" name="bookingDate" required>
                     </div>
 
-
                     <div class="form-group">
-
-                        <label for="bookingTime">
-                            PREFERRED TIME
-                        </label>
-
-                        <input
-                            type="time"
-                            id="bookingTime"
-                            name="bookingTime"
-                            required
-                        >
-
+                        <label for="bookingTime">PREFERRED TIME</label>
+                        <input type="time" id="bookingTime" name="bookingTime" required>
                     </div>
-
                 </div>
 
-
-                <!-- DRIVE TYPE -->
-
                 <div class="form-group">
-
-                    <label for="driveType">
-                        EXPERIENCE TYPE
-                    </label>
-
-                    <select
-                        id="driveType"
-                        name="driveType"
-                        required
-                    >
-
-                        <option value="">
-                            Select Experience
-                        </option>
-
-                        <option value="Test Drive">
-                            Standard Test Drive
-                        </option>
-
-                        <option value="Performance Drive">
-                            Performance Drive
-                        </option>
-
-                        <option value="Electric Experience">
-                            Electric BMW Experience
-                        </option>
-
+                    <label for="driveType">EXPERIENCE TYPE</label>
+                    <select id="driveType" name="driveType" required>
+                        <option value="">Select Experience</option>
+                        <option value="Test Drive">Standard Test Drive</option>
+                        <option value="Performance Drive">Performance Drive</option>
+                        <option value="Electric Experience">Electric BMW Experience</option>
                     </select>
-
                 </div>
-
-
-                <!-- MESSAGE -->
 
                 <div class="form-group">
-
-                    <label for="message">
-                        ADDITIONAL MESSAGE
-                    </label>
-
-                    <textarea
-                        id="message"
-                        name="message"
-                        rows="4"
-                        placeholder="Tell us anything you'd like us to know..."
-                    ></textarea>
-
+                    <label for="message">ADDITIONAL MESSAGE</label>
+                    <textarea id="message" name="message" rows="4" placeholder="Tell us anything you'd like us to know..."></textarea>
                 </div>
 
-
-                <!-- SUBMIT -->
-
-                <button
-                    type="submit"
-                    class="book-button"
-                >
-
-                    <span>
-                        REQUEST TEST DRIVE
-                    </span>
-
+                <button type="submit" class="book-button">
+                    <span>REQUEST TEST DRIVE</span>
                     <strong>→</strong>
-
                 </button>
 
-
-                <!-- MESSAGE -->
-
                 <div id="bookingMessage"></div>
-
             </form>
-
         </section>
 
     </main>
 
-
-    <!-- =========================
-         WHY BMW
-    ========================== -->
-
+    <!-- WHY BMW SECTION -->
     <section class="experience-section">
-
         <div class="experience-heading">
-
-            <span class="section-label">
-                WHY BMW
-            </span>
-
-            <h2>
-                Designed around
-                <span>you.</span>
-            </h2>
-
+            <span class="section-label">WHY BMW</span>
+            <h2>Designed around <span>you.</span></h2>
         </div>
-
 
         <div class="experience-grid">
-
-
             <div class="experience-card">
-
-                <span class="experience-number">
-                    01
-                </span>
-
-                <div class="experience-icon">
-                    ⚡
-                </div>
-
-                <h3>
-                    Performance
-                </h3>
-
-                <p>
-                    Experience responsive handling,
-                    dynamic acceleration and
-                    precision engineering.
-                </p>
-
+                <span class="experience-number">01</span>
+                <div class="experience-icon">⚡</div>
+                <h3>Performance</h3>
+                <p>Experience responsive handling, dynamic acceleration, and precision engineering.</p>
             </div>
 
-
             <div class="experience-card">
-
-                <span class="experience-number">
-                    02
-                </span>
-
-                <div class="experience-icon">
-                    ✨
-                </div>
-
-                <h3>
-                    Luxury
-                </h3>
-
-                <p>
-                    Step into a refined interior
-                    designed around comfort and
-                    premium technology.
-                </p>
-
+                <span class="experience-number">02</span>
+                <div class="experience-icon">✨</div>
+                <h3>Luxury</h3>
+                <p>Step into a refined interior designed around comfort and premium technology.</p>
             </div>
 
-
             <div class="experience-card">
-
-                <span class="experience-number">
-                    03
-                </span>
-
-                <div class="experience-icon">
-                    🧠
-                </div>
-
-                <h3>
-                    Technology
-                </h3>
-
-                <p>
-                    Discover intelligent connectivity,
-                    digital interfaces and modern
-                    driving technology.
-                </p>
-
+                <span class="experience-number">03</span>
+                <div class="experience-icon">🧠</div>
+                <h3>Technology</h3>
+                <p>Discover intelligent connectivity, digital interfaces, and modern driving technology.</p>
             </div>
 
-
             <div class="experience-card">
-
-                <span class="experience-number">
-                    04
-                </span>
-
-                <div class="experience-icon">
-                    🏆
-                </div>
-
-                <h3>
-                    The Experience
-                </h3>
-
-                <p>
-                    Turn an ordinary test drive into
-                    an unforgettable BMW journey.
-                </p>
-
+                <span class="experience-number">04</span>
+                <div class="experience-icon">🏆</div>
+                <h3>The Experience</h3>
+                <p>Turn an ordinary test drive into an unforgettable BMW journey.</p>
             </div>
-
         </div>
-
     </section>
 
-    <div class="form-header">
-    <span class="section-label">
-        TEST DRIVE REQUEST
-    </span>
-
-    <h2>
-        Book a BMW
-    </h2>
-
-    <p>
-        Fill in your details and we'll
-        take care of the rest.
-    </p>
-</div>
-
-<!-- CONFIGURE BMW CTA -->
-
-<div class="configure-cta">
-
-```
-<div class="configure-cta-icon">
-    ⚙
-</div>
-
-<div class="configure-cta-content">
-    <span>MAKE IT YOURS</span>
-
-    <h3>Configure Your BMW</h3>
-
-    <p>
-        Choose your model, exterior color,
-        wheels and interior before booking.
-    </p>
-</div>
-
-<a href="configurator.html" class="configure-cta-button">
-    Configure Now
-    <strong>→</strong>
-</a>
-```
-
-</div>
-
-
-
-    <!-- =========================
-         FOOTER
-    ========================== -->
-
-    <footer>
-
-        <div class="footer-logo">
-            BMW JOURNEY
+    <!-- CONFIGURE CTA -->
+    <div class="configure-cta-container">
+        <div class="configure-cta">
+            <div class="configure-cta-icon">⚙</div>
+            <div class="configure-cta-content">
+                <span>MAKE IT YOURS</span>
+                <h3>Configure Your BMW</h3>
+                <p>Choose your model, exterior color, wheels, and interior before booking.</p>
+            </div>
+            <a href="configurator.html" class="configure-cta-button">
+                <span>Configure Now</span>
+                <strong>→</strong>
+            </a>
         </div>
+    </div>
 
-        <p>
-            Drive. Explore. Remember.
-        </p>
-
-        <span>
-            &copy; 2026 BMW Journey Project
-        </span>
-
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-logo">BMW JOURNEY</div>
+        <p>Drive. Explore. Remember.</p>
+        <span>&copy; 2026 BMW Journey Project</span>
     </footer>
 
-
-    <!-- JAVASCRIPT -->
-
     <script src="js/book.js"></script>
-
 </body>
 </html>
