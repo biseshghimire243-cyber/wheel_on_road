@@ -281,3 +281,52 @@ nav a:hover, nav a.active { color: #FFF; }
     .studio-container { grid-template-columns: 1fr; }
     .viewer-section { min-height: 400px; }
 }
+
+/* Video Section Container */
+.video-section {
+    width: 100%;
+    padding: 4rem 4% 6rem 4%;
+    background: linear-gradient(180deg, var(--bg-dark) 0%, #0A0F1A 100%);
+    border-top: 1px solid var(--card-border);
+}
+
+.video-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.video-header {
+    margin-bottom: 2.5rem;
+}
+
+.video-header h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0.4rem 0 0.8rem 0;
+    color: var(--text-main);
+}
+
+.video-header p {
+    color: var(--text-muted);
+    font-size: 1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Responsive Native Video Container */
+.video-wrapper {
+    position: relative;
+    width: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid var(--card-border);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(28, 105, 212, 0.2);
+}
+
+.video-wrapper video {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}

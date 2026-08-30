@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // 1. Core DOM Elements
     const car360Frame = document.getElementById("car360Frame");
     const carStage = document.getElementById("carStage");
     const angleValue = document.getElementById("angleValue");
@@ -6,38 +7,39 @@ document.addEventListener("DOMContentLoaded", () => {
     const colorLabel = document.getElementById("colorLabel");
     const ambientGlow = document.getElementById("ambientGlow");
     const dragOverlay = document.getElementById("dragOverlay");
+    const showcaseVideo = document.querySelector(".video-wrapper video");
 
-    // Sample multi-angle image frames per color option
+    // 2. Multi-Angle Image Database Per Color
     const carDatabase = {
         white: [
-            "https://m.atcdn.co.uk/vms/res/028c792194d34bcfa8a0026e9ed3d1b7.jpg",
-            "https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=1000&q=80",
-            "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=1000&q=80",
-            "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=1000&q=80"
+            "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&cs=tinysrgb&w=1000",
+            "https://images.pexels.com/photos/112460/pexels-photo-112460.jpeg?auto=compress&cs=tinysrgb&w=1000",
+            "https://images.pexels.com/photos/707046/pexels-photo-707046.jpeg?auto=compress&cs=tinysrgb&w=1000",
+            "https://images.pexels.com/photos/116675/pexels-photo-116675.jpeg?auto=compress&cs=tinysrgb&w=1000"
         ],
         blue: [
-            "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=1000&q=80",
-            "https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=1000&q=80",
-            "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=1000&q=80",
-            "https://m.atcdn.co.uk/vms/res/028c792194d34bcfa8a0026e9ed3d1b7.jpg"
+            "https://images.pexels.com/photos/1008659/pexels-photo-1008659.jpeg?auto=compress&cs=tinysrgb&w=1000",
+            "https://images.pexels.com/photos/112460/pexels-photo-112460.jpeg?auto=compress&cs=tinysrgb&w=1000",
+            "https://images.pexels.com/photos/707046/pexels-photo-707046.jpeg?auto=compress&cs=tinysrgb&w=1000",
+            "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&cs=tinysrgb&w=1000"
         ],
         black: [
-            "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=1000&q=80",
-            "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=1000&q=80",
-            "https://m.atcdn.co.uk/vms/res/028c792194d34bcfa8a0026e9ed3d1b7.jpg",
-            "https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=1000&q=80"
+            "https://images.pexels.com/photos/3729464/pexels-photo-3729464.jpeg?auto=compress&cs=tinysrgb&w=1000",
+            "https://images.pexels.com/photos/112460/pexels-photo-112460.jpeg?auto=compress&cs=tinysrgb&w=1000",
+            "https://images.pexels.com/photos/707046/pexels-photo-707046.jpeg?auto=compress&cs=tinysrgb&w=1000",
+            "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&cs=tinysrgb&w=1000"
         ],
         red: [
-            "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=1000&q=80",
-            "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=1000&q=80",
-            "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=1000&q=80",
-            "https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=1000&q=80"
+            "https://images.pexels.com/photos/3311574/pexels-photo-3311574.jpeg?auto=compress&cs=tinysrgb&w=1000",
+            "https://images.pexels.com/photos/112460/pexels-photo-112460.jpeg?auto=compress&cs=tinysrgb&w=1000",
+            "https://images.pexels.com/photos/707046/pexels-photo-707046.jpeg?auto=compress&cs=tinysrgb&w=1000",
+            "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&cs=tinysrgb&w=1000"
         ],
         grey: [
-            "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1000&q=80",
-            "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=1000&q=80",
-            "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=1000&q=80",
-            "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=1000&q=80"
+            "https://images.pexels.com/photos/909907/pexels-photo-909907.jpeg?auto=compress&cs=tinysrgb&w=1000",
+            "https://images.pexels.com/photos/112460/pexels-photo-112460.jpeg?auto=compress&cs=tinysrgb&w=1000",
+            "https://images.pexels.com/photos/707046/pexels-photo-707046.jpeg?auto=compress&cs=tinysrgb&w=1000",
+            "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&cs=tinysrgb&w=1000"
         ]
     };
 
@@ -46,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let isDragging = false;
     let startX = 0;
 
-    // Preload image sets into cache for smooth frame swaps
+    // Preload image cache for smooth frame switches
     Object.values(carDatabase).forEach(colorSet => {
         colorSet.forEach(src => {
             const img = new Image();
@@ -54,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // 1. Color Switch Logic
+    // 3. Color Selection Handler
     colorSwatches.forEach(swatch => {
         swatch.addEventListener("click", () => {
             colorSwatches.forEach(s => s.classList.remove("active"));
@@ -64,16 +66,14 @@ document.addEventListener("DOMContentLoaded", () => {
             const name = swatch.getAttribute("data-name");
             const bgGlow = swatch.getAttribute("data-bg");
 
-            // Update details and ambient light floor color
             colorLabel.textContent = name;
             ambientGlow.style.background = bgGlow;
 
-            // Render updated color frame
             updateCarFrame();
         });
     });
 
-    // 2. 360-Degree Mouse & Touch Drag Rotation
+    // 4. 360-Degree Drag Controller
     const handleDragStart = (clientX) => {
         isDragging = true;
         startX = clientX;
@@ -84,21 +84,19 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!isDragging) return;
 
         const deltaX = clientX - startX;
-        const dragThreshold = 40; // Pixels moved to trigger frame step
+        const dragThreshold = 35; // Pixels required to step to the next frame
 
         if (Math.abs(deltaX) > dragThreshold) {
             const framesCount = carDatabase[currentColor].length;
 
             if (deltaX < 0) {
-                // Dragging Left -> Rotate Clockwise
                 currentFrameIndex = (currentFrameIndex + 1) % framesCount;
             } else {
-                // Dragging Right -> Rotate Counter-Clockwise
                 currentFrameIndex = (currentFrameIndex - 1 + framesCount) % framesCount;
             }
 
             updateCarFrame();
-            startX = clientX; // Reset anchor position for next frame transition
+            startX = clientX;
         }
     };
 
@@ -107,23 +105,35 @@ document.addEventListener("DOMContentLoaded", () => {
         dragOverlay.style.opacity = "1";
     };
 
-    // Mouse Listeners
+    // Mouse Drag Listeners
     carStage.addEventListener("mousedown", (e) => handleDragStart(e.clientX));
     window.addEventListener("mousemove", (e) => handleDragMove(e.clientX));
     window.addEventListener("mouseup", handleDragEnd);
 
-    // Touch Listeners for Mobile Compatibility
+    // Touch Drag Listeners (Mobile / Tablet)
     carStage.addEventListener("touchstart", (e) => handleDragStart(e.touches[0].clientX));
     window.addEventListener("touchmove", (e) => handleDragMove(e.touches[0].clientX));
     window.addEventListener("touchend", handleDragEnd);
 
-    // Render helper function
+    // Render Update Function
     function updateCarFrame() {
         const frameList = carDatabase[currentColor];
         car360Frame.src = frameList[currentFrameIndex];
 
-        // Calculate virtual angle for angle indicator text
         const degrees = Math.round((currentFrameIndex / frameList.length) * 360);
         angleValue.textContent = `${degrees}°`;
+    }
+
+    // 5. Video Autoplay Fallback & Policy Handling
+    if (showcaseVideo) {
+        showcaseVideo.muted = true;
+        const playPromise = showcaseVideo.play();
+
+        if (playPromise !== undefined) {
+            playPromise.catch(() => {
+                // Handle autoplay block gracefully if triggered by browser security restrictions
+                console.warn("Autoplay blocked by browser. User interaction required.");
+            });
+        }
     }
 });
