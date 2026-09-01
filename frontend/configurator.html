@@ -1,28 +1,19 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>BMW Journey | M4 Configurator</title>
-
     <link rel="stylesheet" href="css/configurator.css">
-
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
-<!-- ================= NAVBAR ================= -->
-
 <header class="navbar">
-
     <div class="logo">
         <span class="logo-icon">✦</span>
         <span>BMW <b>JOURNEY</b></span>
     </div>
-
     <nav>
         <a href="index.html">Home</a>
         <a href="journey.html">Journey</a>
@@ -30,710 +21,263 @@
         <a href="configurator.html" class="active">Configurator</a>
         <a href="book.html">Book a BMW</a>
     </nav>
-
 </header>
 
-
-<!-- ================= MAIN CONFIGURATOR ================= -->
-
 <main class="studio-container">
-
-    <!-- ================= CAR VIEWER ================= -->
-
     <section class="viewer-section">
-
         <div class="studio-badge">
-            <span class="live-dot"></span>
-            360° INTERACTIVE STUDIO
+            <span class="live-dot"></span> 360° INTERACTIVE STUDIO
         </div>
-
 
         <div class="car-stage" id="carStage">
-
             <div class="ambient-glow" id="ambientGlow"></div>
-
             <div class="floor-reflection"></div>
-
-            <img
-                id="car360Frame"
-                src="https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&cs=tinysrgb&w=1200"
-                alt="BMW M4 Competition"
-                draggable="false"
-            >
-
+            <img id="car360Frame" src="https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="BMW M4 Competition" draggable="false">
             <div class="drag-overlay" id="dragOverlay">
-
                 <div class="drag-icon">↔</div>
-
-                <span>
-                    DRAG HORIZONTALLY TO ROTATE 360°
-                </span>
-
+                <span>DRAG HORIZONTALLY TO ROTATE 360°</span>
             </div>
-
         </div>
-
 
         <div class="angle-indicator">
-
-            ANGLE:
-            <span id="angleValue">0°</span>
-
+            ANGLE: <span id="angleValue">0°</span>
         </div>
-
 
         <div class="viewer-controls">
-
             <button id="rotateLeft">←</button>
-
             <button id="resetRotation">RESET</button>
-
             <button id="rotateRight">→</button>
-
         </div>
-
     </section>
 
-
-    <!-- ================= CUSTOMIZER ================= -->
-
     <aside class="customizer-panel">
-
         <div class="panel-header">
-
-            <span class="eyebrow">
-                THE ULTIMATE DRIVING MACHINE
-            </span>
-
+            <span class="eyebrow">THE ULTIMATE DRIVING MACHINE</span>
             <h1>BMW M4 Competition</h1>
-
-            <p>
-                Configure your BMW exactly the way you want it.
-            </p>
-
+            <p>Configure your BMW exactly the way you want it.</p>
         </div>
-
-
-        <!-- ================= PRICE ================= -->
 
         <div class="price-box">
-
             <span>YOUR CONFIGURATION</span>
-
-            <div id="totalPrice">
-                $78,100
-            </div>
-
-            <small>
-                Estimated starting price
-            </small>
-
+            <div id="totalPrice">$78,100</div>
+            <small>Estimated starting price</small>
         </div>
 
-
-        <!-- ================= EXTERIOR ================= -->
-
         <div class="config-card">
-
             <div class="card-header">
-
                 <h3>EXTERIOR FINISH</h3>
-
-                <span id="colorLabel">
-                    Alpine White
-                </span>
-
+                <span id="colorLabel">Alpine White</span>
             </div>
-
-
             <div class="color-grid">
-
-                <button
-                    class="color-swatch active"
-                    data-color="white"
-                    data-name="Alpine White"
-                    data-price="0"
-                    data-hex="#FFFFFF"
-                >
+                <button class="color-swatch active" data-color="white" data-name="Alpine White" data-price="0" data-hex="#FFFFFF">
                     <span style="background:#ffffff"></span>
                 </button>
-
-
-                <button
-                    class="color-swatch"
-                    data-color="blue"
-                    data-name="Marina Bay Blue"
-                    data-price="500"
-                    data-hex="#1C69D4"
-                >
+                <button class="color-swatch" data-color="blue" data-name="Marina Bay Blue" data-price="500" data-hex="#1C69D4">
                     <span style="background:#1C69D4"></span>
                 </button>
-
-
-                <button
-                    class="color-swatch"
-                    data-color="black"
-                    data-name="Sapphire Black"
-                    data-price="700"
-                    data-hex="#111111"
-                >
+                <button class="color-swatch" data-color="black" data-name="Sapphire Black" data-price="700" data-hex="#111111">
                     <span style="background:#111111"></span>
                 </button>
-
-
-                <button
-                    class="color-swatch"
-                    data-color="red"
-                    data-name="Toronto Red"
-                    data-price="800"
-                    data-hex="#D32F2F"
-                >
+                <button class="color-swatch" data-color="red" data-name="Toronto Red" data-price="800" data-hex="#D32F2F">
                     <span style="background:#D32F2F"></span>
                 </button>
-
-
-                <button
-                    class="color-swatch"
-                    data-color="grey"
-                    data-name="Brooklyn Grey"
-                    data-price="900"
-                    data-hex="#5E6B73"
-                >
+                <button class="color-swatch" data-color="grey" data-name="Brooklyn Grey" data-price="900" data-hex="#5E6B73">
                     <span style="background:#5E6B73"></span>
                 </button>
-
             </div>
-
         </div>
 
-
-        <!-- ================= ENGINE ================= -->
-
         <div class="config-card">
-
             <div class="card-header">
-
                 <h3>POWERTRAIN</h3>
-
             </div>
-
-
             <div class="option-list">
-
-                <label class="option">
-
-                    <input
-                        type="radio"
-                        name="engine"
-                        value="M TwinPower Turbo"
-                        data-price="0"
-                        data-hp="503"
-                        data-acceleration="3.4"
-                        checked
-                    >
-
+                <label class="option active">
+                    <input type="radio" name="engine" value="M TwinPower Turbo" data-price="0" data-hp="503 HP" data-acceleration="3.4s" checked>
                     <div>
                         <strong>M TwinPower Turbo</strong>
                         <small>503 HP · 3.4s 0–60 MPH</small>
                     </div>
-
                     <span>+$0</span>
-
                 </label>
-
-
                 <label class="option">
-
-                    <input
-                        type="radio"
-                        name="engine"
-                        value="M Hybrid Performance"
-                        data-price="6500"
-                        data-hp="550"
-                        data-acceleration="3.1"
-                    >
-
+                    <input type="radio" name="engine" value="M Hybrid Performance" data-price="6500" data-hp="550 HP" data-acceleration="3.1s">
                     <div>
                         <strong>M Hybrid Performance</strong>
                         <small>550 HP · 3.1s 0–60 MPH</small>
                     </div>
-
                     <span>+$6,500</span>
-
                 </label>
-
             </div>
-
         </div>
 
-
-        <!-- ================= WHEELS ================= -->
-
         <div class="config-card">
-
             <div class="card-header">
-
                 <h3>WHEELS</h3>
-
             </div>
-
-
             <div class="option-list">
-
-                <label class="option">
-
-                    <input
-                        type="radio"
-                        name="wheels"
-                        value="19-inch M Light-Alloy"
-                        data-price="0"
-                        checked
-                    >
-
+                <label class="option active">
+                    <input type="radio" name="wheels" value="19-inch M Light-Alloy" data-price="0" checked>
                     <div>
                         <strong>19" M Light-Alloy</strong>
                         <small>Standard performance wheels</small>
                     </div>
-
                     <span>+$0</span>
-
                 </label>
-
-
                 <label class="option">
-
-                    <input
-                        type="radio"
-                        name="wheels"
-                        value="20-inch M Performance"
-                        data-price="2500"
-                    >
-
+                    <input type="radio" name="wheels" value="20-inch M Performance" data-price="2500">
                     <div>
                         <strong>20" M Performance</strong>
                         <small>Premium performance wheels</small>
                     </div>
-
                     <span>+$2,500</span>
-
                 </label>
-
-
                 <label class="option">
-
-                    <input
-                        type="radio"
-                        name="wheels"
-                        value="20-inch Carbon Performance"
-                        data-price="4200"
-                    >
-
+                    <input type="radio" name="wheels" value="20-inch Carbon Performance" data-price="4200">
                     <div>
                         <strong>20" Carbon Performance</strong>
                         <small>Lightweight carbon wheels</small>
                     </div>
-
                     <span>+$4,200</span>
-
                 </label>
-
             </div>
-
         </div>
 
-
-        <!-- ================= INTERIOR ================= -->
-
         <div class="config-card">
-
             <div class="card-header">
-
                 <h3>INTERIOR</h3>
-
             </div>
-
-
             <div class="option-list">
-
-                <label class="option">
-
-                    <input
-                        type="radio"
-                        name="interior"
-                        value="Standard Sensatec"
-                        data-price="0"
-                        checked
-                    >
-
+                <label class="option active">
+                    <input type="radio" name="interior" value="Standard Sensatec" data-price="0" checked>
                     <div>
                         <strong>Standard Sensatec</strong>
                         <small>Sport-focused interior</small>
                     </div>
-
                     <span>+$0</span>
-
                 </label>
-
-
                 <label class="option">
-
-                    <input
-                        type="radio"
-                        name="interior"
-                        value="Merino Leather"
-                        data-price="2500"
-                    >
-
+                    <input type="radio" name="interior" value="Merino Leather" data-price="2500">
                     <div>
                         <strong>Merino Leather</strong>
                         <small>Premium leather upholstery</small>
                     </div>
-
                     <span>+$2,500</span>
-
                 </label>
-
-
                 <label class="option">
-
-                    <input
-                        type="radio"
-                        name="interior"
-                        value="Full Merino Leather"
-                        data-price="3500"
-                    >
-
+                    <input type="radio" name="interior" value="Full Merino Leather" data-price="3500">
                     <div>
                         <strong>Full Merino Leather</strong>
                         <small>Luxury leather interior</small>
                     </div>
-
                     <span>+$3,500</span>
-
                 </label>
-
             </div>
-
         </div>
-
-
-        <!-- ================= PACKAGES ================= -->
 
         <div class="config-card">
-
             <div class="card-header">
-
                 <h3>OPTIONAL PACKAGES</h3>
-
             </div>
-
-
             <div class="checkbox-list">
-
-                <label>
-
-                    <input
-                        type="checkbox"
-                        class="package"
-                        value="M Sport Package"
-                        data-price="3500"
-                    >
-
+                <label class="option-checkbox">
+                    <input type="checkbox" class="package" value="M Sport Package" data-price="3500">
                     <span>M Sport Package</span>
-
                     <strong>+$3,500</strong>
-
                 </label>
-
-
-                <label>
-
-                    <input
-                        type="checkbox"
-                        class="package"
-                        value="Premium Package"
-                        data-price="2000"
-                    >
-
+                <label class="option-checkbox">
+                    <input type="checkbox" class="package" value="Premium Package" data-price="2000">
                     <span>Premium Package</span>
-
                     <strong>+$2,000</strong>
-
                 </label>
-
-
-                <label>
-
-                    <input
-                        type="checkbox"
-                        class="package"
-                        value="Technology Package"
-                        data-price="2500"
-                    >
-
+                <label class="option-checkbox">
+                    <input type="checkbox" class="package" value="Technology Package" data-price="2500">
                     <span>Technology Package</span>
-
                     <strong>+$2,500</strong>
-
                 </label>
-
-
-                <label>
-
-                    <input
-                        type="checkbox"
-                        class="package"
-                        value="Carbon Performance Package"
-                        data-price="4500"
-                    >
-
+                <label class="option-checkbox">
+                    <input type="checkbox" class="package" value="Carbon Performance Package" data-price="4500">
                     <span>Carbon Performance Package</span>
-
                     <strong>+$4,500</strong>
-
                 </label>
-
             </div>
-
         </div>
-
-
-        <!-- ================= SPECS ================= -->
 
         <div class="config-card specs-card">
-
             <div class="spec-item">
-
-                <span
-                    class="spec-value"
-                    id="horsepower"
-                >
-                    503 HP
-                </span>
-
-                <span class="spec-key">
-                    POWER
-                </span>
-
+                <span class="spec-value" id="horsepower">503 HP</span>
+                <span class="spec-key">POWER</span>
             </div>
-
-
             <div class="spec-divider"></div>
-
-
             <div class="spec-item">
-
-                <span
-                    class="spec-value"
-                    id="acceleration"
-                >
-                    3.4s
-                </span>
-
-                <span class="spec-key">
-                    0-60 MPH
-                </span>
-
+                <span class="spec-value" id="acceleration">3.4s</span>
+                <span class="spec-key">0-60 MPH</span>
             </div>
-
-
             <div class="spec-divider"></div>
-
-
             <div class="spec-item">
-
-                <span
-                    class="spec-value"
-                    id="engineName"
-                >
-                    M TWINPOWER
-                </span>
-
-                <span class="spec-key">
-                    ENGINE
-                </span>
-
+                <span class="spec-value" id="engineName">M TWINPOWER</span>
+                <span class="spec-key">ENGINE</span>
             </div>
-
         </div>
 
-
-        <!-- ================= SUMMARY ================= -->
-
         <div class="summary-card">
-
             <div>
                 <span>Base Price</span>
                 <strong id="basePrice">$78,100</strong>
             </div>
-
             <div>
                 <span>Options</span>
                 <strong id="optionsPrice">$0</strong>
             </div>
-
             <div class="summary-total">
-
                 <span>Total</span>
-
-                <strong id="summaryTotal">
-                    $78,100
-                </strong>
-
+                <strong id="summaryTotal">$78,100</strong>
             </div>
-
         </div>
 
-
-        <!-- ================= ACTIONS ================= -->
-
-        <button
-            class="save-btn"
-            id="saveConfigBtn"
-        >
-            ♡ SAVE CONFIGURATION
-        </button>
-
-
-        <a
-            href="book.html"
-            class="book-now-btn"
-            id="proceedBookingBtn"
-        >
+        <button class="save-btn" id="saveConfigBtn">♡ SAVE CONFIGURATION</button>
+        <a href="book.html" class="btn primary-btn" id="proceedBookingBtn">
             <span>BOOK THIS CONFIGURATION</span>
             <strong>→</strong>
         </a>
-
-
-        <a
-            href="journey.html"
-            class="drive-btn"
-            id="takeWheelBtn"
-        >
+        <a href="journey.html" class="btn secondary-btn" id="takeWheelBtn">
             <span>TAKE THE WHEEL</span>
             <strong>→</strong>
         </a>
-
     </aside>
-
 </main>
 
-
-<!-- ================= CONFIGURATION SUMMARY ================= -->
-
 <section class="configuration-section">
-
     <div class="configuration-container">
-
-        <span class="eyebrow">
-            YOUR BMW
-        </span>
-
-        <h2>
-            Configuration Summary
-        </h2>
-
+        <span class="eyebrow">YOUR BMW</span>
+        <h2>Configuration Summary</h2>
         <div class="configuration-grid">
-
-            <div>
-                <span>MODEL</span>
-                <strong>BMW M4 Competition</strong>
-            </div>
-
-            <div>
-                <span>EXTERIOR</span>
-                <strong id="summaryColor">
-                    Alpine White
-                </strong>
-            </div>
-
-            <div>
-                <span>POWERTRAIN</span>
-                <strong id="summaryEngine">
-                    M TwinPower Turbo
-                </strong>
-            </div>
-
-            <div>
-                <span>WHEELS</span>
-                <strong id="summaryWheels">
-                    19-inch M Light-Alloy
-                </strong>
-            </div>
-
-            <div>
-                <span>INTERIOR</span>
-                <strong id="summaryInterior">
-                    Standard Sensatec
-                </strong>
-            </div>
-
-            <div>
-                <span>PACKAGES</span>
-                <strong id="summaryPackages">
-                    None
-                </strong>
-            </div>
-
+            <div><span>MODEL</span><strong>BMW M4 Competition</strong></div>
+            <div><span>EXTERIOR</span><strong id="summaryColor">Alpine White</strong></div>
+            <div><span>POWERTRAIN</span><strong id="summaryEngine">M TwinPower Turbo</strong></div>
+            <div><span>WHEELS</span><strong id="summaryWheels">19-inch M Light-Alloy</strong></div>
+            <div><span>INTERIOR</span><strong id="summaryInterior">Standard Sensatec</strong></div>
+            <div><span>PACKAGES</span><strong id="summaryPackages">None</strong></div>
         </div>
-
     </div>
-
 </section>
-
-
-<!-- ================= VIDEO ================= -->
 
 <section class="video-section">
-
     <div class="video-container">
-
         <div class="video-header">
-
-            <span class="eyebrow">
-                PURE PERFORMANCE IN MOTION
-            </span>
-
-            <h2>
-                Experience The BMW M4 Competition
-            </h2>
-
-            <p>
-                Watch the legendary engineering and raw power unleashed.
-            </p>
-
+            <span class="eyebrow">PURE PERFORMANCE IN MOTION</span>
+            <h2>Experience The BMW M4 Competition</h2>
+            <p>Watch the legendary engineering and raw power unleashed.</p>
         </div>
-
-
         <div class="video-wrapper">
-
-            <video
-                controls
-                autoplay
-                muted
-                loop
-                playsinline
-                poster="https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&cs=tinysrgb&w=1200"
-            >
-
-                <source
-                    src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
-                    type="video/mp4"
-                >
-
+            <video controls autoplay muted loop playsinline poster="https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&cs=tinysrgb&w=1200">
+                <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4">
                 Your browser does not support the video tag.
-
             </video>
-
         </div>
-
     </div>
-
 </section>
 
-
 <script src="js/configurator.js"></script>
-
 </body>
 </html>
-```
