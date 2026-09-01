@@ -1,16 +1,44 @@
+-- ==========================================
+-- BMW WHEEL ON ROAD DATABASE
+-- ==========================================
+
 CREATE DATABASE IF NOT EXISTS bmw_travel;
 
 USE bmw_travel;
 
+
+-- ==========================================
+-- JOURNEYS TABLE
+-- ==========================================
+
 CREATE TABLE IF NOT EXISTS journeys (
+
     id INT AUTO_INCREMENT PRIMARY KEY,
+
     distance DECIMAL(10,4) NOT NULL,
+
     latitude DECIMAL(10,7) NOT NULL,
+
     longitude DECIMAL(10,7) NOT NULL,
+
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+
 );
 
+
+-- ==========================================
+-- SAMPLE JOURNEY
+-- ==========================================
+
 INSERT INTO journeys
-(distance, latitude, longitude)
+(
+    distance,
+    latitude,
+    longitude
+)
 VALUES
-(0.0000, 27.7172, 85.3240);
+(
+    0.0000,
+    27.7172,
+    85.3240
+);
