@@ -1,139 +1,156 @@
-document.addEventListener("DOMContentLoaded", () => {
-    // 1. Core DOM Elements
-    const car360Frame = document.getElementById("car360Frame");
-    const carStage = document.getElementById("carStage");
-    const angleValue = document.getElementById("angleValue");
-    const colorSwatches = document.querySelectorAll(".color-swatch");
-    const colorLabel = document.getElementById("colorLabel");
-    const ambientGlow = document.getElementById("ambientGlow");
-    const dragOverlay = document.getElementById("dragOverlay");
-    const showcaseVideo = document.querySelector(".video-wrapper video");
+document.addEventListener('DOMContentLoaded', () => {
+    const basePrice = 78100;
 
-    // 2. Multi-Angle Image Database Per Color
-    const carDatabase = {
-        white: [
-            "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&cs=tinysrgb&w=1000",
-            "https://images.pexels.com/photos/112460/pexels-photo-112460.jpeg?auto=compress&cs=tinysrgb&w=1000",
-            "https://images.pexels.com/photos/707046/pexels-photo-707046.jpeg?auto=compress&cs=tinysrgb&w=1000",
-            "https://images.pexels.com/photos/116675/pexels-photo-116675.jpeg?auto=compress&cs=tinysrgb&w=1000"
-        ],
-        blue: [
-            "https://images.pexels.com/photos/1008659/pexels-photo-1008659.jpeg?auto=compress&cs=tinysrgb&w=1000",
-            "https://images.pexels.com/photos/112460/pexels-photo-112460.jpeg?auto=compress&cs=tinysrgb&w=1000",
-            "https://images.pexels.com/photos/707046/pexels-photo-707046.jpeg?auto=compress&cs=tinysrgb&w=1000",
-            "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&cs=tinysrgb&w=1000"
-        ],
-        black: [
-            "https://images.pexels.com/photos/3729464/pexels-photo-3729464.jpeg?auto=compress&cs=tinysrgb&w=1000",
-            "https://images.pexels.com/photos/112460/pexels-photo-112460.jpeg?auto=compress&cs=tinysrgb&w=1000",
-            "https://images.pexels.com/photos/707046/pexels-photo-707046.jpeg?auto=compress&cs=tinysrgb&w=1000",
-            "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&cs=tinysrgb&w=1000"
-        ],
-        red: [
-            "https://images.pexels.com/photos/3311574/pexels-photo-3311574.jpeg?auto=compress&cs=tinysrgb&w=1000",
-            "https://images.pexels.com/photos/112460/pexels-photo-112460.jpeg?auto=compress&cs=tinysrgb&w=1000",
-            "https://images.pexels.com/photos/707046/pexels-photo-707046.jpeg?auto=compress&cs=tinysrgb&w=1000",
-            "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&cs=tinysrgb&w=1000"
-        ],
-        grey: [
-            "https://images.pexels.com/photos/909907/pexels-photo-909907.jpeg?auto=compress&cs=tinysrgb&w=1000",
-            "https://images.pexels.com/photos/112460/pexels-photo-112460.jpeg?auto=compress&cs=tinysrgb&w=1000",
-            "https://images.pexels.com/photos/707046/pexels-photo-707046.jpeg?auto=compress&cs=tinysrgb&w=1000",
-            "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&cs=tinysrgb&w=1000"
-        ]
-    };
+    // DOM Elements
+    const totalPriceEl = document.getElementById('totalPrice');
+    const basePriceEl = document.getElementById('basePrice');
+    const optionsPriceEl = document.getElementById('optionsPrice');
+    const summaryTotalEl = document.getElementById('summaryTotal');
+    const colorLabel = document.getElementById('colorLabel');
+    const ambientGlow = document.getElementById('ambientGlow');
 
-    let currentColor = "white";
-    let currentFrameIndex = 0;
+    // Spec Elements
+    const horsepowerEl = document.getElementById('horsepower');
+    const accelerationEl = document.getElementById('acceleration');
+    const engineNameEl = document.getElementById('engineName');
+
+    // Summary Display Elements
+    const summaryColor = document.getElementById('summaryColor');
+    const summaryEngine = document.getElementById('summaryEngine');
+    const summaryWheels = document.getElementById('summaryWheels');
+    const summaryInterior = document.getElementById('summaryInterior');
+    const summaryPackages = document.getElementById('summaryPackages');
+
+    // Interactive Controls
+    const colorSwatches = document.querySelectorAll('.color-swatch');
+    const engineInputs = document.querySelectorAll('input[name="engine"]');
+    const wheelInputs = document.querySelectorAll('input[name="wheels"]');
+    const interiorInputs = document.querySelectorAll('input[name="interior"]');
+    const packageInputs = document.querySelectorAll('.package');
+
+    // 360 Viewer Controls
+    const carStage = document.getElementById('carStage');
+    const car360Frame = document.getElementById('car360Frame');
+    const angleValue = document.getElementById('angleValue');
+    let currentAngle = 0;
     let isDragging = false;
     let startX = 0;
 
-    // Preload image cache for smooth frame switches
-    Object.values(carDatabase).forEach(colorSet => {
-        colorSet.forEach(src => {
-            const img = new Image();
-            img.src = src;
-        });
-    });
+    // Calculate Dynamic Prices & Features
+    function updateConfiguration() {
+        let optionsTotal = 0;
 
-    // 3. Color Selection Handler
-    colorSwatches.forEach(swatch => {
-        swatch.addEventListener("click", () => {
-            colorSwatches.forEach(s => s.classList.remove("active"));
-            swatch.classList.add("active");
+        // Color
+        const selectedColor = document.querySelector('.color-swatch.active');
+        const colorPrice = parseInt(selectedColor.dataset.price);
+        const colorHex = selectedColor.dataset.hex;
+        colorLabel.textContent = selectedColor.dataset.name;
+        summaryColor.textContent = selectedColor.dataset.name;
+        ambientGlow.style.background = colorHex;
+        optionsTotal += colorPrice;
 
-            currentColor = swatch.getAttribute("data-color");
-            const name = swatch.getAttribute("data-name");
-            const bgGlow = swatch.getAttribute("data-bg");
+        // Engine
+        const selectedEngine = document.querySelector('input[name="engine"]:checked');
+        const enginePrice = parseInt(selectedEngine.dataset.price);
+        optionsTotal += enginePrice;
+        summaryEngine.textContent = selectedEngine.value;
+        horsepowerEl.textContent = selectedEngine.dataset.hp;
+        accelerationEl.textContent = selectedEngine.dataset.acceleration;
+        engineNameEl.textContent = selectedEngine.value.split(' ')[1]?.toUpperCase() || 'TURBO';
 
-            colorLabel.textContent = name;
-            ambientGlow.style.background = bgGlow;
+        // Wheels
+        const selectedWheels = document.querySelector('input[name="wheels"]:checked');
+        optionsTotal += parseInt(selectedWheels.dataset.price);
+        summaryWheels.textContent = selectedWheels.value;
 
-            updateCarFrame();
-        });
-    });
+        // Interior
+        const selectedInterior = document.querySelector('input[name="interior"]:checked');
+        optionsTotal += parseInt(selectedInterior.dataset.price);
+        summaryInterior.textContent = selectedInterior.value;
 
-    // 4. 360-Degree Drag Controller
-    const handleDragStart = (clientX) => {
-        isDragging = true;
-        startX = clientX;
-        dragOverlay.style.opacity = "0.2";
-    };
-
-    const handleDragMove = (clientX) => {
-        if (!isDragging) return;
-
-        const deltaX = clientX - startX;
-        const dragThreshold = 35; // Pixels required to step to the next frame
-
-        if (Math.abs(deltaX) > dragThreshold) {
-            const framesCount = carDatabase[currentColor].length;
-
-            if (deltaX < 0) {
-                currentFrameIndex = (currentFrameIndex + 1) % framesCount;
-            } else {
-                currentFrameIndex = (currentFrameIndex - 1 + framesCount) % framesCount;
+        // Packages
+        const selectedPackages = [];
+        packageInputs.forEach(pkg => {
+            if (pkg.checked) {
+                optionsTotal += parseInt(pkg.dataset.price);
+                selectedPackages.push(pkg.value);
             }
+        });
+        summaryPackages.textContent = selectedPackages.length > 0 ? selectedPackages.join(', ') : 'None';
 
-            updateCarFrame();
-            startX = clientX;
-        }
-    };
-
-    const handleDragEnd = () => {
-        isDragging = false;
-        dragOverlay.style.opacity = "1";
-    };
-
-    // Mouse Drag Listeners
-    carStage.addEventListener("mousedown", (e) => handleDragStart(e.clientX));
-    window.addEventListener("mousemove", (e) => handleDragMove(e.clientX));
-    window.addEventListener("mouseup", handleDragEnd);
-
-    // Touch Drag Listeners (Mobile / Tablet)
-    carStage.addEventListener("touchstart", (e) => handleDragStart(e.touches[0].clientX));
-    window.addEventListener("touchmove", (e) => handleDragMove(e.touches[0].clientX));
-    window.addEventListener("touchend", handleDragEnd);
-
-    // Render Update Function
-    function updateCarFrame() {
-        const frameList = carDatabase[currentColor];
-        car360Frame.src = frameList[currentFrameIndex];
-
-        const degrees = Math.round((currentFrameIndex / frameList.length) * 360);
-        angleValue.textContent = `${degrees}°`;
+        // Update Totals
+        const finalPrice = basePrice + optionsTotal;
+        const formattedTotal = `$${finalPrice.toLocaleString()}`;
+        
+        totalPriceEl.textContent = formattedTotal;
+        optionsPriceEl.textContent = `$${optionsTotal.toLocaleString()}`;
+        summaryTotalEl.textContent = formattedTotal;
     }
 
-    // 5. Video Autoplay Fallback & Policy Handling
-    if (showcaseVideo) {
-        showcaseVideo.muted = true;
-        const playPromise = showcaseVideo.play();
-
-        if (playPromise !== undefined) {
-            playPromise.catch(() => {
-                // Handle autoplay block gracefully if triggered by browser security restrictions
-                console.warn("Autoplay blocked by browser. User interaction required.");
+    // Radio Card Activation State UI
+    function handleOptionCardSelection(inputs) {
+        inputs.forEach(input => {
+            input.addEventListener('change', (e) => {
+                inputs.forEach(i => i.closest('.option')?.classList.remove('active'));
+                if (e.target.checked) {
+                    e.target.closest('.option')?.classList.add('active');
+                }
+                updateConfiguration();
             });
-        }
+        });
     }
+
+    handleOptionCardSelection(engineInputs);
+    handleOptionCardSelection(wheelInputs);
+    handleOptionCardSelection(interiorInputs);
+
+    packageInputs.forEach(pkg => pkg.addEventListener('change', updateConfiguration));
+
+    // Color Swatch Selection
+    colorSwatches.forEach(swatch => {
+        swatch.addEventListener('click', () => {
+            colorSwatches.forEach(s => s.classList.remove('active'));
+            swatch.classList.add('active');
+            updateConfiguration();
+        });
+    });
+
+    // Interactive 360 Drag rotation simulator
+    carStage.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        startX = e.clientX;
+    });
+
+    window.addEventListener('mouseup', () => isDragging = false);
+
+    window.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        const deltaX = e.clientX - startX;
+        currentAngle = (currentAngle + Math.round(deltaX / 5)) % 360;
+        if (currentAngle < 0) currentAngle += 360;
+        
+        angleValue.textContent = `${currentAngle}°`;
+        car360Frame.style.transform = `rotateY(${currentAngle / 10}deg)`; // Subtle visual feedback
+        startX = e.clientX;
+    });
+
+    // Control Buttons
+    document.getElementById('rotateLeft').addEventListener('click', () => {
+        currentAngle = (currentAngle - 15 + 360) % 360;
+        angleValue.textContent = `${currentAngle}°`;
+    });
+
+    document.getElementById('rotateRight').addEventListener('click', () => {
+        currentAngle = (currentAngle + 15) % 360;
+        angleValue.textContent = `${currentAngle}°`;
+    });
+
+    document.getElementById('resetRotation').addEventListener('click', () => {
+        currentAngle = 0;
+        angleValue.textContent = `0°`;
+        car360Frame.style.transform = `rotateY(0deg)`;
+    });
+
+    // Initial calculation initialization
+    updateConfiguration();
 });
